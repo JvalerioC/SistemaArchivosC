@@ -1,1 +1,2 @@
-# MIA_Proyecto1_201905743
+## Jose Valerio Choc Mijangos
+## Carnet:201905743 
