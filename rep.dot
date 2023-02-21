@@ -1,0 +1,58 @@
+/* digraph G {
+  node [shape=plaintext, fontname="Arial", fontsize=12];
+  edge [style=invis];
+
+  // Tabla 
+  node [shape=rect, style=filled, fillcolor="#CCCCCC", height=0.5, width=1.5];
+  A [fillcolor="#FF0000", fontcolor="#FFFFFF"];
+  B [fillcolor="#00FF00", fontcolor="#FFFFFF"];
+  C [fillcolor="#0000FF", fontcolor="#FFFFFF"];
+  {rank=same; A B C}
+  A -> B -> C;
+  D -> E -> F;
+  G -> H -> I;
+
+  // Conexiones
+  edge [style=solid, arrowhead=none, color="#000000"];
+  A -> D -> G;
+  B -> E -> H;
+  C -> F -> I;
+}
+ *//*
+digraph G {
+  node [shape=plaintext, fontname="Arial", fontsize=12];
+  edge [style=invis];
+
+  Tabla
+  node [shape=rect, style=filled, fillcolor="#CCCCCC", height=0.5, width=1.5];
+  {rank=same; A B C}
+  A -> B -> C;
+  {rank=same; D E F}
+  D -> E -> F;
+  {rank=same; G H I}
+  G -> H -> I;
+
+  //Conexiones 
+  edge [style=solid, arrowhead=none, color="#000000"];
+  A -> D -> G;
+  B -> E -> H;
+  C -> F -> I;
+}*/
+
+digraph {
+    // Configuración del nodo con la tabla
+    node [shape=plaintext, fillcolor="green"];
+    tabla [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+    <TR>
+      <TD PORT="port3" BGCOLOR="#FFFC33">MBR</TD>
+      <TD PORT="port4" BGCOLOR="#33FF83">Particion 1</TD>
+      <TD PORT="port4" BGCOLOR="#33FF83">Particion 2</TD>
+      <TD PORT="port4" BGCOLOR="#33FF83">Particion 3</TD>
+      <TD PORT="port4" BGCOLOR="#33FF83">Particion 4</TD>
+    </TR>
+  </TABLE>>];
+
+}
+
+//

@@ -1,0 +1,13 @@
+digraph mkdisk {
+node [shape=plaintext, fillcolor="green"];
+tabla [label=<
+<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+<TR>
+  <TD PORT="port3" BGCOLOR="#FFFC33">MBR</TD>
+  <TD PORT="port4" BGCOLOR="#33FF83">Particion 1</TD>
+  <TD PORT="port4" BGCOLOR="#33FF83">Particion 2</TD>
+  <TD PORT="port4" BGCOLOR="#33FF83">Particion 3</TD>
+  <TD PORT="port4" BGCOLOR="#33FF83">Particion 4</TD>
+</TR>
+</TABLE>>];
+}
