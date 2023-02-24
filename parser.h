@@ -112,8 +112,9 @@ extern int yydebug;
     T_NUMEROP = 313,               /* T_NUMEROP  */
     T_DIGITO = 314,                /* T_DIGITO  */
     T_CADENA = 315,                /* T_CADENA  */
-    T_ARCHIVO = 316,               /* T_ARCHIVO  */
-    T_ID = 317                     /* T_ID  */
+    T_COMENTARIO = 316,            /* T_COMENTARIO  */
+    T_ARCHIVO = 317,               /* T_ARCHIVO  */
+    T_ID = 318                     /* T_ID  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -122,11 +123,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 23 "parser.y"
+#line 29 "parser.y"
 
     char val[200];
 
-#line 130 "parser.h"
+#line 131 "parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

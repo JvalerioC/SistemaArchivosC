@@ -10,11 +10,12 @@ using namespace std;
 %option nounput
 DIGITO      [0-9]
 NUMEROP     {DIGITO}+
-NUMERON     \-{DIGITO}+
+NUMERON     -{DIGITO}+
 ARCHIVO     {ID}[.]{ID}
 CADENA      ([\"][^\"]*[\"])
-ID          [_a-zA-Z]([_a-zA-Z0-9])*
+ID          [_a-zA-Z0-9]+
 RUTA        [/]({ID}[/])*
+COMENTARIO  [#].*
 
 %%
 
@@ -84,6 +85,7 @@ RUTA        [/]({ID}[/])*
 {RUTA}        { strcpy(yylval.val, yytext); return T_RUTA; }
 ">"           { strcpy(yylval.val, yytext); return T_FLECHA; }
 "="           { strcpy(yylval.val, yytext); return T_IGUAL;}
+{COMENTARIO}  { strcpy(yylval.val, yytext); return T_COMENTARIO;}
 "\n"          {}
 [[:blank:]]   {}
 .             { cout << "Hay un error en la entrada, token no valido" << endl; }

@@ -1,6 +1,8 @@
 #include "mkdisk.h"
 #include <algorithm>
 #include <sys/stat.h>
+#include "method_and_function.h"
+#include <vector>
 
 
 using std::cout, std::endl;
@@ -38,7 +40,7 @@ void Mkdisk::ejecutarComando(){
   //pasamos la variable fit a minusculas, se valida que sea menor a longitud 3 y que 
   std::transform(fit.begin(), fit.end(), fit.begin(), ::toupper);
   if(fit.length()==2){
-    if(fit != "BF" || fit != "FF" || fit != "WF"){
+    if(fit != "BF" && fit != "FF" && fit != "WF"){
       cout<<"Error, el valor ingresado para el parametro fit no es valido"<<endl;
       return;
     }
@@ -53,22 +55,40 @@ void Mkdisk::ejecutarComando(){
       return;
     }else{ unit1 = unit[0]; }
   }else if(unit.length() == 0){ unit1 = 'M'; }
+  else{
+      cout<<"Error, el valor ingresado para el parametro unit no es valido"<<endl;
+        return;}
 
+  //si la ruta contiene comillas estas se eliminan
+  string pathTemporal = replaceQuotesMarks(path);
+  path = pathTemporal;
   //validamos la ruta ingresada, creamos los directorios si estos no existen
+  std::vector<string> carpetas;
+  string separador = "/";
   size_t pos = 0;
-  string delimiter = "/";
-  string token, token2 = "";
-  string pathTemporal = path;
-  while ((pos = pathTemporal.find(delimiter)) != string::npos) {
-    token = pathTemporal.substr(0, pos);
-    token2 += token;
-    mkdir(token2.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    pathTemporal.erase(0, pos + delimiter.length());
-    if(token != ""){
-      token2 += "/";
-    }
+  // se separa la ruta del nombre del archivo
+  while ((pos = pathTemporal.find(separador)) != string::npos) {
+    string carpeta = pathTemporal.substr(0, pos);
+    carpetas.push_back(carpeta);
+    pathTemporal.erase(0, pos + separador.length());
   }
-  path.erase(0,1);
+  string ruta;
+  // se vuelve a juntar para la creacion de las carpetas
+  for (auto c  : carpetas) {
+      ruta= ruta + c +"/";
+  }
+  int status = mkdir(ruta.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+  //se valida si se pudo crear el directorio o no
+  if (status == -1 && errno != EEXIST) {
+    perror("Error creando directorio");
+    return;
+  }
+  // se verifica que se puede crear el archivo en la ruta 
+  bool flag = fileExist(path);
+  if(flag){
+    cout << "Error, el disco ya existe." << endl;
+    return;
+  }
   FILE *archivo;
   archivo = fopen(path.c_str(), "wb");
 
@@ -85,9 +105,12 @@ void Mkdisk::ejecutarComando(){
 void Mkdisk::crearDisco(int _size1, char _unit1){
   MBR mbr;
   FILE *archivo = fopen(path.c_str(), "wb");
-  mbr.mbr_tamano = _size1;
-  char k[1024];
-  int size1 = _size1*1024;
+  char k[1024]; //esto es 1 kb a escribir
+  int size1 = _size1;
+  if (_unit1 == 'M'){
+    size1 = _size1*1024;
+  }
+  mbr.mbr_tamano = size1;
   int inicio = 0;
   while(inicio != size1){
     fwrite(&k, 1024, 1, archivo);
@@ -98,6 +121,7 @@ void Mkdisk::crearDisco(int _size1, char _unit1){
   time_t t = std::chrono::system_clock::to_time_t(t_actual);
   mbr.mbr_fecha_creacion = t;
   mbr.mbr_dsk_signature = rand()+1;
+  mbr.dsk_fit = fit[0];
   fseek(archivo, 0, SEEK_SET);
   fwrite(&mbr, sizeof(mbr), 1, archivo);
   fclose(archivo);
