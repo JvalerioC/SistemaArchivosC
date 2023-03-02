@@ -13,6 +13,7 @@ class Unmount{
         //id
         Unmount(string); //constructor
         void ejecutarComando();
+        void desmontarParticion(int);
 
         
 };

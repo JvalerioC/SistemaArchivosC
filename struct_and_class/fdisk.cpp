@@ -121,7 +121,19 @@ void Fdisk::ejecutarComando(){
   if (!flag){
     cout<<"Error, el disco no existe"<<endl;
     return;
-  }    
+  } 
+  //validamos el unit
+  std::transform(unit.begin(), unit.end(), unit.begin(), ::toupper);
+    if(unit.length() == 1){
+      if(unit != "K" && unit != "M"&& unit != "B"){
+        cout<<"Error, el valor ingresado para el parametro unit no es valido"<<endl;
+        return;
+      }else{ unit1 = unit[0]; }
+    }else if(unit.length() == 0){ unit1 = 'K'; }
+    else{
+      cout<<"Error, el valor ingresado para el parametro unit no es valido"<<endl;
+        return;}
+
   FILE *archivo = fopen(path.c_str(), "r+b");
   MBR mbr;
   fread(&mbr, sizeof(MBR), 1 , archivo);
@@ -144,7 +156,9 @@ void Fdisk::ejecutarComando(){
     return;
   }
   //validamos que sea posible insertar la particion, haya espacio
-  int contadorPrimarias, contadorExtendidas, contadorParticiones;
+  int contadorPrimarias = 0;
+  int contadorExtendidas = 0;
+  int contadorParticiones = 0;
   //validamos las Primarias
   if(mbr.mbr_partition_1.part_type == 'E'){ contadorExtendidas++;  }
   if(mbr.mbr_partition_2.part_type == 'E'){ contadorExtendidas++;  }
@@ -161,6 +175,7 @@ void Fdisk::ejecutarComando(){
     cout<<"Error, ya hay 4 particiones en el disco"<<endl;
     return;
   }
+  
 
   if(tipo1 == 'P'){
     crearParticion(size1, unit1, tipo1, mbr.dsk_fit);
@@ -175,13 +190,13 @@ void Fdisk::ejecutarComando(){
   }else if(tipo1 == 'L' && contadorExtendidas == 1){
     crearLogica(size1, unit1);
   }
-  cout<<"Particion creada exitosamente"<<endl;
+  
 }
 
 //funcion en la que se crea el disco validando el espacio donde hay que insertarlo
 void Fdisk::crearParticion(int _size, char _unit, char _tipo, char _diskFit){
-  int posicion;
-  int tamanio;
+  int posicion = 0;
+  int tamanio = 0;
   if(_unit == 'B'){ tamanio = _size; }
   else if(_unit == 'K'){tamanio = _size*1024;}
   else if(_unit == 'M'){tamanio = _size*1024*1024;}
@@ -189,7 +204,6 @@ void Fdisk::crearParticion(int _size, char _unit, char _tipo, char _diskFit){
   if(_diskFit == 'B'){ posicion = validarBfit(tamanio); }
   else if(_diskFit == 'F'){ posicion = validarFfit(tamanio); }
   else if(_diskFit == 'W'){ posicion = validarWfit(tamanio); }
-
   //si se retorna cero no hay espacio
   if(posicion == 0){
     cout<<"Error, no es posible ingresar particion, no hay espacio disponible"<<endl;
@@ -227,7 +241,8 @@ void Fdisk::crearParticion(int _size, char _unit, char _tipo, char _diskFit){
     fseek(archivo, 0, SEEK_SET);
     //escribimos el mbr
     fwrite(&mbr, sizeof(mbr), 1, archivo);
-    fclose(archivo);    
+    fclose(archivo);
+    cout<<"Particion creada exitosamente"<<endl;    
   }
 }
 //funcion que me devuleve el entero donde se puede insertar la particion teniendo en cuenta el BestFit
@@ -245,10 +260,10 @@ int Fdisk::validarBfit(int _tamanio){
   arreglo[3] = mbr.mbr_partition_4;
   
   ordenarTamanio(arreglo);
-  int tamanio, tamanio_temporal;
+  int tamanio = 0, tamanio_temporal = 0;
   int posicion_final = sizeof(MBR);
   //ahora vemos si hay espacio entre las particiones
-  int contador, contador2 = 0;
+  int contador = 0, contador2 = 0;
   while (contador != 4){
     if(arreglo[contador].part_start != 0){
       if(posicion_final != arreglo[contador].part_start){
@@ -273,6 +288,7 @@ int Fdisk::validarBfit(int _tamanio){
         posicion_final = posicion_final + arreglo[contador].part_s;
       }
     }else{
+      cout<<"cuantas veces entra aqui "<<posicion_final<<endl;
       contador2++; // este lo utilizo para saber si todas las particiones estan vacias
     }
     contador++;
@@ -280,6 +296,8 @@ int Fdisk::validarBfit(int _tamanio){
   // si las 4 particiones estan vacias y el tamanio es cero sera la primera particion a ingresar
   if(contador2 == 4){
     tamanio = sizeof(MBR);
+  }else if(tamanio == 0 && (posicion_final+_tamanio)<(mbr.mbr_tamano*1024)){
+    tamanio = posicion_final;
   }
   //se retorna donde se pueda ingresar la particion con Best fit
   return tamanio;
@@ -301,10 +319,10 @@ int Fdisk::validarWfit(int _tamanio){
   arreglo[3] = mbr.mbr_partition_4;
   
   ordenarTamanio(arreglo);
-  int tamanio, tamanio_temporal;
+  int tamanio = 0, tamanio_temporal = 0;
   int posicion_final = sizeof(MBR);
   //ahora vemos si hay espacio entre las particiones
-  int contador, contador2 = 0;
+  int contador = 0, contador2 = 0;
   while (contador != 4){
     if(arreglo[contador].part_start != 0){
       if(posicion_final != arreglo[contador].part_start){
@@ -336,6 +354,8 @@ int Fdisk::validarWfit(int _tamanio){
   // si las 4 particiones estan vacias y el tamanio es cero sera la primera particion a ingresar
   if(contador2 == 4){
     tamanio = sizeof(MBR);
+  }else if(tamanio == 0 && (posicion_final+_tamanio)<(mbr.mbr_tamano*1024)){
+    tamanio = posicion_final;
   }
   //se retorna donde se pueda ingresar la particion con Best fit
   return tamanio;
@@ -357,10 +377,10 @@ int Fdisk::validarFfit(int _tamanio){
   arreglo[3] = mbr.mbr_partition_4;
   
   ordenarTamanio(arreglo);
-  int tamanio, tamanio_temporal;
+  int tamanio=0, tamanio_temporal=0;
   int posicion_final = sizeof(MBR);
   //ahora vemos si hay espacio entre las particiones
-  int contador, contador2 = 0;
+  int contador=0, contador2 = 0;
   while (contador != 4){
     if(arreglo[contador].part_start != 0){
       if(posicion_final != arreglo[contador].part_start){
@@ -371,7 +391,7 @@ int Fdisk::validarFfit(int _tamanio){
           break;
         }
         //se valida que el tamaño dela posicion final y el tamaño de la nueva particion no supere el tamaño del disco, se multiplica por 1024 ya que este valor se guarda en kb
-        if(posicion_final+_tamanio > mbr.mbr_tamano*1024){
+        if((posicion_final+_tamanio) > (mbr.mbr_tamano*1024)){
           break;
         }
         //solo si se cumple esto se modifica el tamanio disponible, se verifica en todo el disco el menor espacio disponible
@@ -382,6 +402,7 @@ int Fdisk::validarFfit(int _tamanio){
         posicion_final = tamanio_temporal+posicion_final+arreglo[contador].part_s;
       }else{
         posicion_final = posicion_final + arreglo[contador].part_s;
+
       }
     }else{
       contador2++; // este lo utilizo para saber si todas las particiones estan vacias
@@ -391,6 +412,8 @@ int Fdisk::validarFfit(int _tamanio){
   // si las 4 particiones estan vacias y el tamanio es cero sera la primera particion a ingresar
   if(contador2 == 4){
     tamanio = sizeof(MBR);
+  }else if(tamanio == 0 && (posicion_final+_tamanio)<(mbr.mbr_tamano*1024)){
+    tamanio = posicion_final;
   }
   //se retorna donde se pueda ingresar la particion con Best fit al final es una posicion
   return tamanio;
@@ -443,12 +466,11 @@ void Fdisk::eliminarParticion(){
     return;
   }
   //comenzamos a escribir los ceros donde estaba la particion
-  char k[1024]; //esto es un kb
+  char k[1]; //esto es un byte
   fseek(archivo, inicioBorrar, SEEK_SET);
   int inicio = 0;
-  while(inicio!=finBorrar){
-    fwrite(&k, 1024,1,archivo);
-    inicio++;
+  for(int i = inicioBorrar; i<finBorrar;i++){
+    fwrite(&k, 1,1,archivo);
   }
   //reescribimos el mbr
   fseek(archivo, 0, SEEK_SET);
@@ -575,8 +597,8 @@ void Fdisk::expandirParticion(char _unit, int dimension){
 }
 
 void Fdisk::crearLogica(int _size, char _unit){
-  int tamanio, tamanio_particion;
-  int posicion, posicion_anterior;
+  int tamanio=0, tamanio_particion=0;
+  int posicion=0, posicion_anterior=0;
   if(_unit == 'B'){ tamanio = _size; }
   else if(_unit == 'K'){tamanio = _size*1024;}
   else if(_unit == 'M'){tamanio = _size*1024*1024;}
@@ -614,6 +636,7 @@ void Fdisk::crearLogica(int _size, char _unit){
     fseek(archivo, posicion, SEEK_SET);
     fwrite(&ebr, sizeof(EBR), 1, archivo);
     fclose(archivo);
+    cout<<"Particion logica creada exitosamente"<<endl;
     return;
   }else if(ebr.part_next == 0 && ebr.part_s != 0){
     //se guardan estos valores para sobreescribirlos en en disco
@@ -650,6 +673,10 @@ void Fdisk::crearLogica(int _size, char _unit){
     fseek(archivo, posicion_anterior, SEEK_SET);
     fwrite(&ebr, sizeof(EBR), 1, archivo);
   }
+  cout<<posicion_anterior<<endl;
+  cout<<posicion<<endl;
+  cout<<tamanio<<endl;
+  
   //se escribe el ebr actual
   ebr1.part_start = posicion;
   ebr1.part_s = tamanio;
@@ -657,7 +684,7 @@ void Fdisk::crearLogica(int _size, char _unit){
   std::strncpy(ebr1.part_name, name.c_str(), sizeof(ebr1.part_name) - 1);
   ebr1.part_name[sizeof(ebr1.part_name) - 1] = '\0';
   fseek(archivo, posicion, SEEK_SET);
-  fwrite(&ebr, sizeof(EBR), 1, archivo);
+  fwrite(&ebr1, sizeof(EBR), 1, archivo);
   fclose(archivo);
-  
+  cout<<"Particion logica creada exitosamente"<<endl; 
 }

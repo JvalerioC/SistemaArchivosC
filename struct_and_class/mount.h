@@ -4,7 +4,7 @@
 #include <iostream>
 #include "structs.h"
 
-using std::string;
+using std::string, std::cout, std::endl;
 
 class Mount{
     private:

@@ -18,4 +18,7 @@ string existeParticion(string, MBR);
 // no se envia el tamaño porque este siempre sera 4
 void ordenarTamanio(PARTITION[]);
 
+//funcion para mostrar las particiones montadas
+void imprimirParticionesMontadas();
+
 #endif

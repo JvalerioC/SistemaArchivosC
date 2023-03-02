@@ -55,6 +55,7 @@ inicio: mkdisk      {  }
         | unmount   {  }
         | mkfs      {  }
         | loss      {  }
+        | comentario{  }
         /*
         | login     {  }
         | logout    {  }
@@ -187,13 +188,25 @@ p_execute:  T_G_PATH T_IGUAL T_CADENA { path = std::string($3);}
             | T_G_PATH T_IGUAL T_RUTA T_ARCHIVO { path = std::string($3) + std::string($4);}
             | T_G_PATH T_IGUAL T_ARCHIVO { path = std::string($3); };
 
-
-
-
 // analisis para el comando rep
-rep: T_REP {
-    Rep rep; rep.ejecutarComando(); 
+rep: T_REP lp_rep{
+    Rep rep(name, path, id, ruta); 
+    rep.ejecutarComando(); 
+    limpiarVariables();
 }
+
+lp_rep: lp_rep p_rep 
+        | p_rep;
+
+p_rep:  T_G_NAME T_IGUAL T_ID { name = std::string($3); }
+        | T_G_PATH T_IGUAL T_CADENA { path = std::string($3);}
+        | T_G_PATH T_IGUAL T_RUTA T_ARCHIVO { path = std::string($3) + std::string($4);}
+        | T_G_PATH T_IGUAL T_ARCHIVO { path = std::string($3); }
+        | T_G_ID T_IGUAL T_ID { id = std::string($3); }
+        | T_G_RUTA T_IGUAL T_ID {ruta = std::string($3);}
+        | T_G_RUTA T_IGUAL T_CADENA {ruta = std::string($3);}; 
+
+comentario: T_COMENTARIO { std::cout<<std::string($1)<<std::endl;}
 
 
 %%
@@ -212,9 +225,10 @@ void limpiarVariables(){
     name = "";
     add = "";
     fs = "";
+    id = "";
 
     nId = "";
-    id = "";
+    
     ruta = "";
     user = "";
     pass = "";

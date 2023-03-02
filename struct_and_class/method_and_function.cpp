@@ -39,11 +39,19 @@ void ordenarTamanio(PARTITION arreglo[]){
   PARTITION temp;
   for (int i = 0; i < 3; i++){
     for (int j = 0; j <3-i; j++){
-      if(arreglo[j].part_start > arreglo[j+1].part_start){
+      if((arreglo[j].part_start > arreglo[j+1].part_start)){
         temp = arreglo[j];
         arreglo[j] = arreglo[j+1];
         arreglo[j+1] = temp;
       } 
     }
   } 
+}
+
+void imprimirParticionesMontadas(){
+  cout<<"\nParticiones montadas.."<<endl;
+  cout<<"----------------------"<<endl;
+  for(int i = 0; i<particionMontada.size();i++){
+    cout<<particionMontada[i].id<<endl;
+  }
 }

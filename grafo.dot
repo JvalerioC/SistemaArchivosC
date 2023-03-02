@@ -1,13 +1,77 @@
-digraph mkdisk {
-node [shape=plaintext, fillcolor="green"];
-tabla [label=<
-<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-<TR>
-  <TD PORT="port3" BGCOLOR="#FFFC33">MBR</TD>
-  <TD PORT="port4" BGCOLOR="#33FF83">Particion 1</TD>
-  <TD PORT="port4" BGCOLOR="#33FF83">Particion 2</TD>
-  <TD PORT="port4" BGCOLOR="#33FF83">Particion 3</TD>
-  <TD PORT="port4" BGCOLOR="#33FF83">Particion 4</TD>
-</TR>
-</TABLE>>];
+//formato para el reporte de disco
+/* digraph disk{
+
+  tbl [
+
+    shape=plaintext
+    label=<
+
+    <table border='0' cellborder='1' color='grey' cellspacing='1'>
+      <tr>
+        <td border='0' colspan="3">Disco.dsk</td>
+      </tr>
+      <tr>
+        <td border='0'>
+          <table color='gray' cellspacing='3' cellpadding='5'>
+            <tr>
+              <td>MBR</td>
+              <td>Libre<br/>15%</td>
+              <td>Particion1<br/>10%</td>
+              <td>Particion2<br/>5%</td>
+              <td border='0' cellpadding='0'>
+                <table cellborder='0' color='gray' cellpadding='5' cellspacing='0'>
+                  <tr>
+                    <td border='1' colspan="8">Extendida</td>
+                  </tr>
+                  <tr>
+                    <td border='1'>Particion3<br/>5%</td>
+                    <td border='1'>Particion4<br/>5%</td>
+                    <td border='1'>Particion5<br/>5%</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    >];
+
+} */
+//formato para el reporte mbr
+digraph D {
+
+
+  some_node [
+    shape=plaintext
+    label=<
+      <table cellborder="1" cellspacing="1" cellpadding='4'>
+        <tr>
+          <td colspan='2' bgcolor='gray'>Reporte MBR</td>
+        </tr>
+        <tr>
+          <td>Bar</td>
+          <td>Bar</td>
+        </tr>
+        <tr>
+          <td bgcolor="#f0e3ff">Baz</td>
+          <td bgcolor="#f0e3ff">Baz</td>
+        </tr>
+        <tr>
+          <td colspan='2' bgcolor="gray">Reporte MBR</td>
+        </tr>
+        <tr>
+          <td bgcolor="lightblue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bar</td>
+          <td bgcolor="lightblue">Bar</td>
+        </tr>
+        <tr>
+          <td bgcolor="#f0e3ff">Baz</td>
+          <td bgcolor="#f0e3ff">Baz</td>
+        </tr>
+      </table>>
+  ];
+ 
+
+
 }

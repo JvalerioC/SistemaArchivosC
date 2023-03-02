@@ -31,3 +31,4 @@ int main(){
 //comando para bison
 //bison -d parser.y
 //comando para compilar ./compile.sh
+//ejecutar sudo ./main
