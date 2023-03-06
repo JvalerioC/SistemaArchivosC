@@ -20,9 +20,12 @@ class Rep{
         void crearReporte(string, string);
         void reporteMBR(itemMount);
         void reporteDisk(itemMount);
-
-
-
+        void reporteSuperbloque(itemMount);
+        void reporteBMInodo(itemMount);
+        void reporteBMBloque(itemMount);
+        void reporteInodo(itemMount);
+        void reporteBloque(itemMount);
+        void reporteFile(itemMount);
         
 };
 

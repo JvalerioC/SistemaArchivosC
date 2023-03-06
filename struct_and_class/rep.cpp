@@ -57,10 +57,8 @@ void Rep::ejecutarComando(){
   }
   //valida el parametro name para generar el reporte correcto
   if(name.compare("mbr")==0){
-    cout<<"Entro al reporte de mbr"<<endl;
     reporteMBR(item);
   }else if (name.compare("disk")==0){
-    cout<<"Entro al reporte de disk"<<endl;
     reporteDisk(item);
   }else if(name.compare("inode")==0){
     //reporteInode();
@@ -72,20 +70,16 @@ void Rep::ejecutarComando(){
     //reporteBlock();
     cout<<"Entro al reporte de block"<<endl;
   }else if(name.compare("bm_inode")==0){
-    //reporteBmInode();
-    cout<<"Entro al reporte de bm_inode"<<endl;
-  }else if(name.compare("bm_block")==0){
-    //reporteBmBlock();
-    cout<<"Entro al reporte de bm_block"<<endl;
+    reporteBMInodo(item);
+  }else if(name.compare("bm_bloc")==0){
+    reporteBMBloque(item);
   }else if(name.compare("tree")==0){
     //reporteTree();
     cout<<"Entro al reporte de tree"<<endl;
   }else if(name.compare("file")==0){
-    //reporteFile();
-    cout<<"Entro al reporte de file"<<endl;
+    reporteFile(item);
   }else if(name.compare("sb")==0){
-    //reporteSb();
-    cout<<"Entro al reporte de sb"<<endl;
+    reporteSuperbloque(item);
   }else if(name.compare("ls")==0){
     //reporteLs();
     cout<<"Entro al reporte de ls"<<endl;
@@ -205,6 +199,7 @@ void Rep::reporteMBR(itemMount _item){
     }
     
   }
+  fclose(archivo);
   dot += "</table>\n";
   dot += ">];\n";
   dot += "}\n";
@@ -359,6 +354,181 @@ void Rep::reporteDisk(itemMount _item){
   dot += "  >];\n";
   dot += "}";
   crearReporte(dot, "disk");
+}
+
+void Rep::reporteSuperbloque(itemMount _item){
+  SUPERBLOQUE sb;
+  FILE *archivo = fopen(_item.path.c_str(), "rb");
+  //se posiciona al inicio de la particion para recuperar el sb
+  fseek(archivo, _item.part.part_start, SEEK_SET);
+  fread(&sb, sizeof(SUPERBLOQUE), 1, archivo);
+  fclose(archivo);
+  string dot = "digraph sb {\n";
+  dot += "  some_node [\n";
+  dot += "    shape=plaintext\n";
+  dot += "    label=<\n";
+  dot += "      <table cellpadding='4' cellborder='1' color='grey' cellspacing='1'>\n";
+  dot += "        <tr>\n";
+  dot += "          <td  colspan='2' bgcolor='gray'>Reporte SUPERBLOQUE</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_filesystem_type</td>\n";
+  string syste_type = "";
+  if(sb.s_filesystem_type == 2){
+    syste_type = "EXT2";
+  }else if(sb.s_filesystem_type == 3){
+    syste_type = "EXT3";
+  }
+  dot += "          <td>"+syste_type+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_inodes_count</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_inodes_count)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_blocks_count</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_blocks_count)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_free_inodes_count</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_free_inodes_count)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_free_blocks_count</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_free_blocks_count)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_mtime</td>\n";
+  char buffer[80]; // buffer para almacenar la cadena de texto
+  std::strftime(buffer, 80, "%Y-%m-%d %H:%M:%S", std::localtime(&sb.s_mtime)); // formatea la fecha y hora en una cadena de texto
+  std::string fecha_hora(buffer); // convierte la cadena de texto en un objeto std::string
+  dot += "          <td>"+fecha_hora+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_umtime</td>\n";
+  std::strftime(buffer, 80, "%Y-%m-%d %H:%M:%S", std::localtime(&sb.s_umtime)); // formatea la fecha y hora en una cadena de texto
+  fecha_hora = string(buffer); // convierte la cadena de texto en un objeto std::string
+  dot += "          <td>"+fecha_hora+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_magic</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_magic)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_inode_s</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_inode_s)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_block_s</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_block_s)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_firts_ino</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_firts_ino)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_firts_blo</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_first_blo)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_bm_inode_start</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_bm_inode_start)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_bm_block_start</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_bm_block_start)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_inode_start</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_inode_start)+"</td>\n";
+  dot += "        </tr>\n";
+  dot += "        <tr>\n";
+  dot += "          <td>s_block_start</td>\n";
+  dot += "          <td>"+std::to_string(sb.s_block_start)+"</td>\n";
+  dot += "        </tr>\n";
+  
+  dot += "</table>\n";
+  dot += ">];\n";
+  dot += "}\n";
+  
+
+  crearReporte(dot, "sb");
+}
+
+void Rep::reporteBMInodo(itemMount _item){
+  SUPERBLOQUE sb;
+  FILE *archivo = fopen(_item.path.c_str(), "rb");
+  fseek(archivo, _item.part.part_start, SEEK_SET);
+  fread(&sb, sizeof(SUPERBLOQUE), 1, archivo);
+  int final_bm = sb.s_inodes_count;
+
+  string contenido_b = "";
+  int contador_i = 0;
+  char c = 'a';
+  for (size_t i = 0; i < final_bm; i++){
+    contador_i ++;
+    fseek(archivo, sb.s_bm_inode_start+i, SEEK_SET);
+    fread(&c, 1, 1, archivo);
+    if(c == '1'){
+      contenido_b += c;
+    }else{
+      contenido_b += '0';
+    }
+    if(contador_i == 20){
+      contenido_b += "\n";
+      contador_i = 0;
+    }
+  }
+  fclose(archivo);
+  std::ofstream reporte(path.c_str());
+  if(reporte.is_open()){
+    reporte << contenido_b;
+    reporte.close();
+  }else{
+    cout << "Error al generar el reporte" << endl;
+    return;
+  }
+  cout<<"Reporte creado con exito"<<endl;
+}
+
+void Rep::reporteBMBloque(itemMount _item){
+  SUPERBLOQUE sb;
+  FILE *archivo = fopen(_item.path.c_str(), "rb");
+  fseek(archivo, _item.part.part_start, SEEK_SET);
+  fread(&sb, sizeof(SUPERBLOQUE), 1, archivo);
+  int final_bm = sb.s_blocks_count;
+  string contenido_b = "";
+  int contador_i = 0;
+  char c = 'a';
+  for (size_t i = 0; i < final_bm; i++){
+    contador_i ++;
+    fseek(archivo, sb.s_bm_block_start+i, SEEK_SET);
+    fread(&c, 1, 1, archivo);
+    if(c == '1'){
+      contenido_b += c;
+    }else{
+      contenido_b += '0';
+    }
+    
+    if(contador_i == 20){
+      contenido_b += "\n";
+      contador_i = 0;
+    }
+  }
+  fclose(archivo);
+  std::ofstream reporte(path.c_str());
+  if(reporte.is_open()){
+    reporte << contenido_b;
+    reporte.close();
+  }else{
+    cout << "Error al generar el reporte" << endl;
+    return;
+  }
+  cout<<"Reporte creado con exito"<<endl;
+}
+
+void Rep::reporteFile(itemMount _item){
+  
 }
 
 void Rep::crearReporte(string dot, string nombre){

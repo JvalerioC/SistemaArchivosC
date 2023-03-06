@@ -466,7 +466,7 @@ void Fdisk::eliminarParticion(){
     return;
   }
   //comenzamos a escribir los ceros donde estaba la particion
-  char k[1]; //esto es un byte
+  char k[1] = {0}; //esto es un byte
   fseek(archivo, inicioBorrar, SEEK_SET);
   int inicio = 0;
   for(int i = inicioBorrar; i<finBorrar;i++){
@@ -672,11 +672,7 @@ void Fdisk::crearLogica(int _size, char _unit){
   if(flag1){
     fseek(archivo, posicion_anterior, SEEK_SET);
     fwrite(&ebr, sizeof(EBR), 1, archivo);
-  }
-  cout<<posicion_anterior<<endl;
-  cout<<posicion<<endl;
-  cout<<tamanio<<endl;
-  
+  }  
   //se escribe el ebr actual
   ebr1.part_start = posicion;
   ebr1.part_s = tamanio;

@@ -40,8 +40,8 @@ typedef struct{
 
 //struct para los montajes
 typedef struct{
-    PARTITION part; //particion que fue montada, creo que solo neceesito el nombre
-    std::string id; //id que identifica la montura
+    PARTITION part; //particion que fue montada, creo que solo neceesito el nombre y donde inicia
+    std::string id=""; //id que identifica la montura
     std::string path; //para saber la ruta del disco, reportes
     MBR mbr; // para tener informacion de las particiones en disco,reportes
 
@@ -60,8 +60,8 @@ typedef struct{
     int s_magic=0;
     int s_inode_s=0;
     int s_block_s=0;
-    int s_firts_ino=0;
-    int s_first_blo=0;
+    int s_firts_ino=1;
+    int s_first_blo=1;
     int s_bm_inode_start=0;
     int s_bm_block_start=0;
     int s_inode_start=0;
@@ -77,7 +77,7 @@ typedef struct{
     time_t i_atime;
     time_t i_ctime;
     time_t i_mtime;
-    int i_block=0;
+    int i_block[15]={-1};
     char i_type='0';
     int i_perm=0;
 
@@ -86,12 +86,13 @@ typedef struct{
 //estructura para el bloque de contenido
 typedef struct{
     char b_name[12];
-    int b_inodo=0; 
+    int b_inodo=-1; 
 }B_CONTENIDO;
 
 //estructura para el bloque de carpeta
 typedef struct{
     B_CONTENIDO b_content[4];
+
 }B_CARPETA;
 
 
@@ -106,7 +107,15 @@ typedef struct{
    int b_pointers[16] = {0}; 
 }B_APUNTADOR;
 
+typedef struct{
+    bool iniciado = false;
+    int is_admin = 0;
+    std::string user = "";
+    itemMount loginItem;
+}USUARIO;
+
 //este vector lo usare para los montajes y desmontajes en memoria
 extern std::vector<itemMount> particionMontada;
+extern USUARIO usuario_logueado;
 
 #endif

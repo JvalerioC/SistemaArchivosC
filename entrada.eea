@@ -2,10 +2,20 @@ mkdisk >size=5 >unit=M >path=/home/user/Disco1.dsk
 fdisk >type=E >path=/home/user/Disco1.dsk >unit=M >name=Particion1 >size=1
 fdisk >path=/home/user/Disco1.dsk >type=P >unit=M >name=Particion2 >size=1
 fdisk >path=/home/user/Disco1.dsk >unit=M >type=P >name=Particion3 >size=1
-fdisk >type=P >path=/home/user/Disco1.dsk >unit=M >size=1 >name=Particion4
+#fdisk >type=P >path=/home/user/Disco1.dsk >unit=M >size=1 >name=Particion4
 fdisk >size=500 >type=L >unit=K >fit=bf >path=/home/user/Disco1.dsk >name=Particion4
 fdisk >size=300 >type=L >unit=K >fit=bf >path=/home/user/Disco1.dsk >name=Particion5
 mount >path=/home/user/Disco1.dsk >name=Particion2
 rep >id=431Disco1 >path=/home/user/reports/report2.pdf >name=disk
 rep >id=431Disco1 >path=/home/user/reports/reporte1.jpg >name=mbr
 unmount >id=431Disco1
+#a aver que tal
+mkfs >type=full >id=431Disco1
+rep >id=431Disco1 >path=/home/user/reports/report8.jpg >name=sb
+rep >id=431Disco1 >path=/home/user/reports/report5.txt >name=bm_inode
+rep >id=431Disco1 >path=/home/user/reports/report6.txt >name=bm_bloc
+rep >id=431Disco1 >path=/home/user/reports/report3.jpg >name=inode
+pause
+rep >id=431Disco1 >path=/home/user/reports/report4.jpg >name=block
+#rep >id=431Disco1 >path=/home/user/reports/report9.txt >ruta=/home/users.txt
+>name=file

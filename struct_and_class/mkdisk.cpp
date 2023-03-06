@@ -105,7 +105,7 @@ void Mkdisk::ejecutarComando(){
 void Mkdisk::crearDisco(int _size1, char _unit1){
   MBR mbr;
   FILE *archivo = fopen(path.c_str(), "wb");
-  char k[1024]; //esto es 1 kb a escribir
+  char k[1024] = {0}; //esto es 1 kb a escribir
   int size1 = _size1;
   if (_unit1 == 'M'){
     size1 = _size1*1024;

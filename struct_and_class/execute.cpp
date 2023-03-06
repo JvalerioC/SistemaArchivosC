@@ -35,7 +35,7 @@ void Execute::ejecutarArchivo(){
     while(getline(file, line)){
         if(line.length() > 0){
           //se imprime la linea
-          cout << line << endl;
+          cout <<"> "<< line << endl;
           //se analiza la linea
           yy_scan_string(line.c_str());
           yyparse();

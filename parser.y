@@ -3,6 +3,8 @@
 #include <cstdio>
 #include <string>
 #include "lexer.h"
+#include <vector>
+
 #include "./struct_and_class/mkdisk.h"
 #include "./struct_and_class/rmdisk.h"
 #include "./struct_and_class/fdisk.h"
@@ -11,6 +13,21 @@
 #include "./struct_and_class/mkfs.h"
 #include "./struct_and_class/execute.h"
 #include "./struct_and_class/loss.h"
+#include "./struct_and_class/user_and_group/login.h"
+#include "./struct_and_class/user_and_group/logout.h"
+#include "./struct_and_class/user_and_group/rmgrp.h"
+#include "./struct_and_class/user_and_group/rmusr.h"
+#include "./struct_and_class/user_and_group/mkusr.h"
+#include "./struct_and_class/user_and_group/mkgrp.h"
+#include "./struct_and_class/files/cat.h"
+#include "./struct_and_class/files/copy.h"
+#include "./struct_and_class/files/edit.h"
+#include "./struct_and_class/files/mkdir.h"
+#include "./struct_and_class/files/mkfile.h"
+#include "./struct_and_class/files/move.h"
+#include "./struct_and_class/files/pause.h"
+#include "./struct_and_class/files/remove.h"
+#include "./struct_and_class/files/rename.h"
 
 #include "./struct_and_class/rep.h"
 
@@ -20,7 +37,9 @@ int yylex(void);
 void yyerror(const char *);
 //variables para el manejo de parametros
 void limpiarVariables();
-std::string size, fit, unit, path, tipo, borrar, name, add, nId, id, fs, ruta, user, pass, grp, ugo, r, cont, nFile, p, destino;
+std::string size, fit, unit, path, tipo, borrar, name, add, nId, id, fs, ruta, user, pass, grp, ugo, r, cont,p, destino;
+std::vector<std::string> nFile;
+std::vector<std::string> paths;
 
 %}
 %defines "parser.h"
@@ -56,14 +75,13 @@ inicio: mkdisk      {  }
         | mkfs      {  }
         | loss      {  }
         | comentario{  }
-        /*
         | login     {  }
         | logout    {  }
         | mkgrp     {  }
         | rmgrp     {  }
         | mkusr     {  }
-        | rmust     {  }
-        | chmod     {  }
+        | rmusr     {  }
+        //| chmod     {  }
         | mkfile    {  }
         | cat       {  }
         | remove    {  }
@@ -72,11 +90,11 @@ inicio: mkdisk      {  }
         | mkdir     {  }
         | copy      {  }
         | move      {  }
-        | find      {  }
-        | chown     {  }
-        | chgrp     {  }
+        //| find      {  }
+        //| chown     {  }
+        //| chgrp     {  }
         | pause     {  }
-        | comentario{  }*/
+        
 ;
 
 // analisis para el comando mkdisk
@@ -206,14 +224,217 @@ p_rep:  T_G_NAME T_IGUAL T_ID { name = std::string($3); }
         | T_G_RUTA T_IGUAL T_ID {ruta = std::string($3);}
         | T_G_RUTA T_IGUAL T_CADENA {ruta = std::string($3);}; 
 
-comentario: T_COMENTARIO { std::cout<<std::string($1)<<std::endl;}
+// los comentarios solo se imprimen
+comentario: T_COMENTARIO { /*std::cout<<std::string($1)<<std::endl;*/};
 
+//-------usuario  y grupos
+
+//analisis para comando login
+login:  T_LOGIN lp_login{
+    Login login(user, pass, id);
+    login.ejecutarComando();
+    limpiarVariables();
+
+};
+
+lp_login:   lp_login p_login
+            | p_login;
+
+p_login:    T_G_USR T_IGUAL T_ID { user = std::string($3); }
+            | T_G_PASS T_IGUAL T_ID { pass = std::string($3);}
+            | T_G_ID T_IGUAL T_ID { id = std::string($3); };
+
+//analisis para el comando logout
+logout:     T_LOGOUT {
+    Logout lout;
+    lout.ejecutarComando();
+};
+
+//analisis para el comando mkgrp
+mkgrp:  T_MKGRP T_G_NAME T_ID {
+    id = std::string($3);
+    Mkgrp mkgrp(id);
+    mkgrp.ejecutarComando();
+    limpiarVariables();
+};
+
+//analisis para el comando 
+rmgrp:  T_RMGRP T_G_NAME T_ID{
+    id = std::string($3);
+    Rmgrp rmgrp(id);
+    rmgrp.ejecutarComando();
+    limpiarVariables();
+};
+
+//analisis para el comando mkusr
+mkusr:  T_MKUSR lp_mkusr{
+    Mkusr mkusr(user, pass, grp);
+    mkusr.ejecutarComando();
+    limpiarVariables();
+};
+
+lp_mkusr:   lp_mkusr p_mkusr
+            | p_mkusr;
+
+p_mkusr:    T_G_USR T_IGUAL T_ID { user = std::string($3); }
+            | T_G_PASS T_IGUAL T_ID { pass = std::string($3);}
+            | T_G_GRP T_IGUAL T_ID { grp = std::string($3); };
+
+//analisis para el comando rmusr
+rmusr:  T_RMUSR T_G_USR T_ID {
+    user = std::string($3);
+    Rmusr rmusr(user);
+    rmusr.ejecutarComando();
+    limpiarVariables();
+};
+
+//----------archivos y carpetas
+
+//analisis para el comando mkfile
+mkfile:     T_MKFILE lp_mkfile{
+    Mkfile mkfile(path, r, size, cont);
+    mkfile.ejecutarComando();
+    limpiarVariables();
+};
+
+lp_mkfile:  lp_mkfile p_mkfile
+            | p_mkfile;
+
+p_mkfile:   T_G_PATH T_IGUAL T_CADENA { path = std::string($3);}
+            | T_G_PATH T_IGUAL T_RUTA T_ARCHIVO { path = std::string($3) + std::string($4);}
+            | T_G_PATH T_IGUAL T_ARCHIVO { path = std::string($3); }
+            | T_G_R { r = "1";}
+            | T_G_S T_IGUAL T_NUMEROP { size = std::string($3); }
+            | T_G_CONT T_IGUAL T_CADENA { cont = std::string($3);}
+            | T_G_CONT T_IGUAL T_RUTA T_ARCHIVO { cont = std::string($3) + std::string($4);}
+            | T_G_CONT T_IGUAL T_ARCHIVO { cont = std::string($3); };
+
+//analisis para el comando cat
+cat:    T_CAT lp_cat{
+    Cat cat(nFile, paths);
+    cat.ejecutarComando();
+    limpiarVariables();
+};
+
+lp_cat: lp_cat p_cat
+        | p_cat;
+
+p_cat:  T_G_FILE T_NUMEROP T_IGUAL T_CADENA { paths.push_back(std::string($4));
+ std::string arch = std::string($1) + std::string($2); nFile.push_back(arch);}
+        | T_G_FILE T_NUMEROP T_IGUAL T_RUTA T_ARCHIVO { path = std::string($4) + std::string($5);
+        std::string arch = std::string($1) + std::string($2); nFile.push_back(arch);
+        paths.push_back(path);}
+        | T_G_FILE T_NUMEROP T_IGUAL T_ARCHIVO { path = std::string($4); 
+        paths.push_back(path);
+        std::string arch = std::string($1) + std::string($2); nFile.push_back(arch);};
+
+//analisis para el comando remove
+remove: T_REMOVE lp_remove{
+    Remove remove(path);
+    remove.ejecutarComando();
+    limpiarVariables();
+};
+
+lp_remove:  lp_remove p_remove
+            | p_remove;
+
+p_remove:   T_G_PATH T_IGUAL T_CADENA { path = std::string($3);}
+            | T_G_PATH T_IGUAL T_RUTA T_ARCHIVO { path = std::string($3) + std::string($4);}
+            | T_G_PATH T_IGUAL T_ARCHIVO { path = std::string($3); };
+
+//analisis para el comando edit
+edit:     T_EDIT lp_edit{
+    Edit edit(path, cont);
+    edit.ejecutarComando();
+    limpiarVariables();
+};
+
+lp_edit:    lp_edit p_edit
+            | p_edit;
+
+p_edit:     T_G_PATH T_IGUAL T_CADENA { path = std::string($3);}
+            | T_G_PATH T_IGUAL T_RUTA T_ARCHIVO { path = std::string($3) + std::string($4);}
+            | T_G_PATH T_IGUAL T_ARCHIVO { path = std::string($3); }
+            | T_G_CONT T_IGUAL T_CADENA { cont = std::string($3);}
+            | T_G_CONT T_IGUAL T_RUTA T_ARCHIVO { cont = std::string($3) + std::string($4);}
+            | T_G_CONT T_IGUAL T_ARCHIVO { cont = std::string($3); };
+
+//analisis para el comando rename
+rename:     T_RENAME lp_rename{
+    Rename rename(path, name);
+    rename.ejecutarComando();
+    limpiarVariables();
+};
+
+lp_rename:    lp_rename p_rename
+            | p_rename;
+
+p_rename:     T_G_PATH T_IGUAL T_CADENA { path = std::string($3);}
+            | T_G_PATH T_IGUAL T_RUTA T_ARCHIVO { path = std::string($3) + std::string($4);}
+            | T_G_PATH T_IGUAL T_ARCHIVO { path = std::string($3); }
+            | T_G_NAME T_IGUAL T_CADENA { name = std::string($3);}
+            | T_G_NAME T_IGUAL T_ARCHIVO { name = std::string($3); };
+
+//analisis para el comando mkdir
+mkdir:     T_MKDIR lp_mkdir{
+    Mkdir mkdir(path, r);
+    mkdir.ejecutarComando();
+    limpiarVariables();
+};
+
+lp_mkdir:    lp_mkdir p_mkdir
+            | p_mkdir;
+
+p_mkdir:     T_G_PATH T_IGUAL T_CADENA { path = std::string($3);}
+            | T_G_PATH T_IGUAL T_RUTA T_ARCHIVO { path = std::string($3) + std::string($4);}
+            | T_G_PATH T_IGUAL T_ARCHIVO { path = std::string($3); }
+            | T_G_R { r = "1";};
+
+//analisis para el comando copy
+copy:     T_COPY lp_copy{
+    Copy copy(path, destino);
+    copy.ejecutarComando();
+    limpiarVariables();
+};
+
+lp_copy:    lp_copy p_copy
+            | p_copy;
+
+p_copy:     T_G_PATH T_IGUAL T_CADENA { path = std::string($3);}
+            | T_G_PATH T_IGUAL T_RUTA T_ARCHIVO { path = std::string($3) + std::string($4);}
+            | T_G_PATH T_IGUAL T_ARCHIVO { path = std::string($3); }
+            | T_G_PATH T_IGUAL T_RUTA { path = std::string ($3); }
+            | T_G_DESTINO T_IGUAL T_CADENA { destino = std::string($3);}
+            | T_G_DESTINO T_IGUAL T_RUTA { destino = std::string ($3); };
+
+//analisis para el comando move
+move:     T_MOVE lp_move{
+    Move move(path, destino);
+    move.ejecutarComando();
+    limpiarVariables();
+};
+
+lp_move:    lp_move p_move
+            | p_move;
+
+p_move:     T_G_PATH T_IGUAL T_CADENA { path = std::string($3);}
+            | T_G_PATH T_IGUAL T_RUTA T_ARCHIVO { path = std::string($3) + std::string($4);}
+            | T_G_PATH T_IGUAL T_ARCHIVO { path = std::string($3); }
+            | T_G_PATH T_IGUAL T_RUTA { path = std::string ($3); }
+            | T_G_DESTINO T_IGUAL T_CADENA { destino = std::string($3);}
+            | T_G_DESTINO T_IGUAL T_RUTA { destino = std::string ($3); };
+
+//analisis para el comando pause
+pause: T_PAUSE {
+    Pausa pausa;
+    pausa.ejecutarComando();
+}
 
 %%
 
 void yyerror(const char *s) {
     std::cout << "Error parametro no valido "<< s<<std::endl;
-}
+};
 
 void limpiarVariables(){
     size = "";
@@ -226,17 +447,16 @@ void limpiarVariables(){
     add = "";
     fs = "";
     id = "";
-
-    nId = "";
-    
-    ruta = "";
     user = "";
     pass = "";
     grp = "";
-    ugo = "";
+    ruta = "";
     r = "";
     cont = "";
-    nFile = "";
+    nFile.clear();
+    paths.clear();
+    nId = "";
+    ugo = "";
     p = "";
     destino = "";
     }
