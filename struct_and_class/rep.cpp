@@ -61,26 +61,32 @@ void Rep::ejecutarComando(){
   }else if (name.compare("disk")==0){
     reporteDisk(item);
   }else if(name.compare("inode")==0){
-    //reporteInode();
-    cout<<"Entro al reporte de inode"<<endl;
+    reporteInodo(item);
   }else if(name.compare("Journaling")==0){
     //reporteJournaling();
     cout<<"Entro al reporte de journaling"<<endl;
   }else if(name.compare("block")==0){
-    //reporteBlock();
-    cout<<"Entro al reporte de block"<<endl;
+    reporteBloque(item);
   }else if(name.compare("bm_inode")==0){
     reporteBMInodo(item);
-  }else if(name.compare("bm_bloc")==0){
+  }else if(name.compare("bm_block")==0){
     reporteBMBloque(item);
   }else if(name.compare("tree")==0){
     //reporteTree();
     cout<<"Entro al reporte de tree"<<endl;
   }else if(name.compare("file")==0){
+    if(rutaf == ""){
+      cout<<"Error, el parametro ruta no puede estar vacio"<<endl;
+      return;
+    }
     reporteFile(item);
   }else if(name.compare("sb")==0){
     reporteSuperbloque(item);
   }else if(name.compare("ls")==0){
+    if(rutaf == ""){
+      cout<<"Error, el parametro ruta no puede estar vacio"<<endl;
+      return;
+    }
     //reporteLs();
     cout<<"Entro al reporte de ls"<<endl;
   }
@@ -528,7 +534,217 @@ void Rep::reporteBMBloque(itemMount _item){
 }
 
 void Rep::reporteFile(itemMount _item){
-  
+  FILE *archivo = fopen(_item.path.c_str(), "rb");
+  fseek(archivo, _item.part.part_start, SEEK_SET);
+  SUPERBLOQUE sb;
+  fread(&sb, sizeof(sb), 1, archivo);
+
+  std::stringstream au(rutaf);
+  std::vector<string> parts;
+
+  //separamos el saltos de linea
+  string token;
+  while (std::getline(au, token, '/')) {
+      parts.push_back(token);
+  }
+
+  // Imprimir las partes resultantes
+ /*  for (const auto& part : parts) {
+      std::cout << part << std::endl;
+  } */
+  //se borra el primer elemento ya que esta vacio
+  parts.erase(parts.begin());
+  //se comienza la busqueda desde la raiz
+  B_INODO inodo, inodo1;
+  fseek(archivo, sb.s_inode_start, SEEK_SET);
+  fread(&inodo1, sizeof(inodo), 1, archivo);
+  string contenido_archivo = "";
+  bool encontrado = false;
+  //se el nombre de la carpeta o archivo correspondiente a las posiciones 
+  for (size_t i = 0; i < parts.size(); i++){
+    inodo = inodo1;
+    if(inodo.i_type != '1'){
+      B_CARPETA bc;
+      for (size_t j = 0; j < 15; j++){
+        if(inodo.i_block[j] == -1){
+          break;
+        }
+        fseek(archivo, sb.s_block_start+(sizeof(bc)*inodo.i_block[i]), SEEK_SET);
+        fread(&bc, sizeof(bc), 1, archivo);
+        
+        for (size_t k = 0; k < 4; k++){
+          if(bc.b_content[k].b_inodo == -1){
+            break;
+          }
+          if(parts[i].compare(bc.b_content[k].b_name) == 0){
+            fseek(archivo, sb.s_inode_start+(sizeof(inodo)*bc.b_content[k].b_inodo), SEEK_SET);
+            fread(&inodo1, sizeof(inodo), 1, archivo);
+            if(inodo1.i_type == '1'){
+              encontrado = true;
+            }
+          }
+        }
+      }
+    }
+  }
+  //en este punto se supone que inodo tiene el archivo
+  if(!encontrado){
+    cout<<"Error, el archivo no fue encontrado"<<endl;
+    return;
+  }
+  for (size_t i = 0; i < 15; i++){
+    if(inodo1.i_block[i] == -1){
+      break;
+    }else{
+      B_ARCHIVO ba1;
+      fseek(archivo, sb.s_block_start+(sb.s_block_s*inodo1.i_block[i]), SEEK_SET);
+      fread(&ba1, sizeof(B_ARCHIVO), 1, archivo);
+      contenido_archivo += string(ba1.b_content, std::strlen(ba1.b_content));
+    }
+  }
+  fclose(archivo);
+  std::ofstream reporte(path.c_str());
+  if(reporte.is_open()){
+    reporte << "Reporte de archivo: "+parts[parts.size()-1]+"\n";
+    reporte << contenido_archivo;
+    reporte.close();
+  }else{
+    cout << "Error al generar el reporte" << endl;
+    return;
+  }
+  cout<<"Reporte creado con exito"<<endl;
+
+}
+
+void Rep::reporteInodo(itemMount _item){
+  SUPERBLOQUE sb;
+  FILE *archivo = fopen(_item.path.c_str(), "rb");
+  fseek(archivo, _item.part.part_start, SEEK_SET);
+  fread(&sb, sizeof(SUPERBLOQUE), 1, archivo);
+
+  string dot = "digraph inodes {\n";
+
+  //para obtener los inodos usados se usara del superbloque el primer inodo libre
+  for (size_t i = 0; i < sb.s_firts_ino; i++){
+    B_INODO inodo;
+    fseek(archivo, sb.s_inode_start+(sizeof(B_INODO)*i), SEEK_SET);
+    fread(&inodo, sizeof(inodo), 1, archivo);
+    if(inodo.i_block[0] != -1){
+      dot += "  inode"+std::to_string(i)+"[\n";
+      dot += "    shape=plaintext\n";
+      dot += "    label=<\n";
+      dot += "      <table cellpadding='4' cellborder='1' color='grey' cellspacing='1'>\n";
+      dot+= "         <tr>\n";
+      dot+= "           <td  colspan='2' bgcolor='gray'>Inodo "+std::to_string(i)+"</td>\n";
+      dot+= "         </tr>\n";
+      dot += "        <tr>\n";
+      dot += "          <td>i_uid</td>\n";
+      dot += "          <td>"+std::to_string(inodo.i_uid)+"</td>\n";
+      dot += "        </tr>\n";
+      dot += "        <tr>\n";
+      dot += "          <td>i_gid</td>\n";
+      dot += "          <td>"+std::to_string(inodo.i_gid)+"</td>\n";
+      dot += "        </tr>\n";
+      dot += "        <tr>\n";
+      dot += "          <td>i_size</td>\n";
+      dot += "          <td>"+std::to_string(inodo.i_s)+"</td>\n";
+      dot += "        </tr>\n";
+      char buffer[80]; // buffer para almacenar la cadena de texto
+      std::strftime(buffer, 80, "%Y-%m-%d %H:%M:%S", std::localtime(&inodo.i_ctime)); // formatea la fecha y hora en una cadena de texto
+      std::string fecha_hora(buffer); // convierte la cadena de texto en un objeto std::string
+      dot += "        <tr>\n";
+      dot += "          <td>i_ctime</td>\n";
+      dot += "          <td>"+fecha_hora+"</td>\n";
+      dot += "        </tr>\n";
+      dot += "        <tr>\n";
+      dot += "          <td>i_type</td>\n";
+      dot += "          <td>"+std::string(1, inodo.i_type)+"</td>\n";
+      dot += "        </tr>\n";
+      dot += "        <tr>\n";
+      dot += "          <td>i_perm</td>\n";
+      dot += "          <td>"+std::to_string(inodo.i_perm)+"</td>\n";
+      dot += "        </tr>\n";
+      for (size_t j = 0; j < 15; j++){
+        dot += "        <tr>\n";
+        dot += "          <td>i_block_"+std::to_string(j+1)+"</td>\n";
+        dot += "          <td>"+std::to_string(inodo.i_block[j])+"</td>\n";
+        dot += "        </tr>\n";
+      }
+      dot += "      </table>\n";
+      dot += "    >\n";
+      dot += "  ];\n";
+    }
+  }
+
+  dot += "}";
+  crearReporte(dot, "inodos");
+}
+
+void Rep::reporteBloque(itemMount _item){
+  SUPERBLOQUE sb;
+  FILE *archivo = fopen(_item.path.c_str(), "rb");
+  fseek(archivo, _item.part.part_start, SEEK_SET);
+  fread(&sb, sizeof(SUPERBLOQUE), 1, archivo);
+
+  string dot = "digraph bloques {\n";
+
+  //para obtener los inodos usados se usara del superbloque el primer inodo libre
+  for (size_t i = 0; i < sb.s_firts_ino; i++){
+    B_INODO inodo;
+    fseek(archivo, sb.s_inode_start+(sizeof(B_INODO)*i), SEEK_SET);
+    fread(&inodo, sizeof(inodo), 1, archivo);
+    for (size_t j = 0; j < 15; j++){
+      if(inodo.i_block[j] != -1){
+        if(inodo.i_type == '0'){
+          B_CARPETA bcarpeta;
+          fseek(archivo, sb.s_block_start+(sizeof(B_CARPETA)*inodo.i_block[j]), SEEK_SET);
+          fread(&bcarpeta, sizeof(B_CARPETA), 1, archivo);
+          if(bcarpeta.b_content[0].b_inodo != -1){
+            dot += "  bloque"+std::to_string(inodo.i_block[j])+"[\n";
+            dot += "    shape=plaintext\n";
+            dot += "    label=<\n";
+            dot += "      <table cellpadding='4' cellborder='1' color='grey' cellspacing='1'>\n";
+            dot += "         <tr>\n";
+            dot += "           <td  colspan='2' bgcolor='gray'>Bloque Carpeta "+std::to_string(inodo.i_block[j])+"</td>\n";
+            dot += "         </tr>\n";
+            for (size_t k = 0; k < 4; k++){
+              dot += "        <tr>\n";
+              dot += "          <td>"+string(bcarpeta.b_content[k].b_name, std::strlen(bcarpeta.b_content[k].b_name))+"</td>\n";
+              dot += "          <td>"+std::to_string(bcarpeta.b_content[k].b_inodo)+"</td>\n";
+              dot += "        </tr>\n";
+            }
+            dot += "      </table>\n";
+            dot += "    >\n";
+            dot += "  ];\n";
+          }
+        }else{
+          B_ARCHIVO barchivo;
+          fseek(archivo, sb.s_block_start+(sizeof(B_CARPETA)*inodo.i_block[j]), SEEK_SET);
+          fread(&barchivo, sizeof(B_CARPETA), 1, archivo);
+          if(barchivo.b_content[0] != 0){
+            dot += "  bloque"+std::to_string(inodo.i_block[j])+"[\n";
+            dot += "    shape=plaintext\n";
+            dot += "    label=<\n";
+            dot += "      <table cellpadding='4' cellborder='1' color='grey' cellspacing='1'>\n";
+            dot += "         <tr>\n";
+            dot += "           <td  colspan='2' bgcolor='gray'>Bloque Archivo "+std::to_string(inodo.i_block[j])+"</td>\n";
+            dot += "         </tr>\n";
+            dot += "        <tr>\n";
+            dot += "          <td colspan='2'>"+string(barchivo.b_content, std::strlen(barchivo.b_content))+"</td>\n";
+            dot += "         </tr>\n";
+            dot += "      </table>\n";
+            dot += "    >\n";
+            dot += "  ];\n";
+          }
+        }
+      }else{
+        break;
+      }
+    }
+    
+  }
+  dot += "}";
+  crearReporte(dot, "bloques");
 }
 
 void Rep::crearReporte(string dot, string nombre){

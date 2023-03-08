@@ -18,7 +18,6 @@ class Login{
     Login(string, string, string); //constructor
     void ejecutarComando();
     void iniciarSesion(itemMount);
-    string contenidoArchivo(int);
 };
 
 #endif

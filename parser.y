@@ -222,7 +222,8 @@ p_rep:  T_G_NAME T_IGUAL T_ID { name = std::string($3); }
         | T_G_PATH T_IGUAL T_ARCHIVO { path = std::string($3); }
         | T_G_ID T_IGUAL T_ID { id = std::string($3); }
         | T_G_RUTA T_IGUAL T_ID {ruta = std::string($3);}
-        | T_G_RUTA T_IGUAL T_CADENA {ruta = std::string($3);}; 
+        | T_G_RUTA T_IGUAL T_CADENA {ruta = std::string($3);};
+        | T_G_RUTA T_IGUAL T_RUTA T_ARCHIVO { ruta = std::string($3) + std::string($4);} 
 
 // los comentarios solo se imprimen
 comentario: T_COMENTARIO { /*std::cout<<std::string($1)<<std::endl;*/};
@@ -240,9 +241,11 @@ login:  T_LOGIN lp_login{
 lp_login:   lp_login p_login
             | p_login;
 
-p_login:    T_G_USR T_IGUAL T_ID { user = std::string($3); }
+p_login:    T_G_USR T_IGUAL T_NUMEROP { user = std::string($3); }
+            | T_G_USR T_IGUAL T_ID { user = std::string($3); }
+            | T_G_PASS T_IGUAL T_NUMEROP { pass = std::string($3); }
             | T_G_PASS T_IGUAL T_ID { pass = std::string($3);}
-            | T_G_ID T_IGUAL T_ID { id = std::string($3); };
+            | T_G_ID T_IGUAL T_ID { id = std::string($3); }
 
 //analisis para el comando logout
 logout:     T_LOGOUT {

@@ -61,7 +61,7 @@ COMENTARIO  [#].*
 ">delete"   { strcpy(yylval.val, yytext); return T_G_DELETE; }
 ">add"      { strcpy(yylval.val, yytext); return T_G_ADD; }
 ">pass"     { strcpy(yylval.val, yytext); return T_G_PASS; }
-">usr"      { strcpy(yylval.val, yytext); return T_G_USR; }
+">user"      { strcpy(yylval.val, yytext); return T_G_USR; }
 ">grp"      { strcpy(yylval.val, yytext); return T_G_GRP; }
 ">ugo"      { strcpy(yylval.val, yytext); return T_G_UGO; }
 ">type"     { strcpy(yylval.val, yytext); return T_G_TYPE; }

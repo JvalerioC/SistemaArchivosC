@@ -1,9 +1,10 @@
 #ifndef Rep__
 #define Rep__
-#include <string>
+#include <cstring>
 #include <iostream>
 #include "structs.h"
 #include "method_and_function.h"
+#include <sstream>
 
 using std::string;
 

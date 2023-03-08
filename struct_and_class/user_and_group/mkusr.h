@@ -5,6 +5,7 @@
 #include "../structs.h"
 #include <algorithm>
 #include <cmath>
+#include <sstream>
 
 using std::string;
 

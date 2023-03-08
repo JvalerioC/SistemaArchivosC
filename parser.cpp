@@ -591,16 +591,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  135
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   287
+#define YYLAST   303
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  64
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  60
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  166
+#define YYNRULES  169
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  298
+#define YYNSTATES  302
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   318
@@ -663,15 +663,15 @@ static const yytype_int16 yyrline[] =
      146,   147,   148,   149,   152,   158,   159,   161,   162,   163,
      164,   167,   175,   181,   182,   184,   185,   186,   189,   197,
      203,   205,   206,   207,   210,   216,   217,   219,   220,   221,
-     222,   223,   224,   225,   228,   233,   240,   241,   243,   244,
-     245,   248,   254,   262,   270,   276,   277,   279,   280,   281,
-     284,   294,   300,   301,   303,   304,   305,   306,   307,   308,
-     309,   310,   313,   319,   320,   322,   324,   327,   332,   338,
-     339,   341,   342,   343,   346,   352,   353,   355,   356,   357,
-     358,   359,   360,   363,   369,   370,   372,   373,   374,   375,
-     376,   379,   385,   386,   388,   389,   390,   391,   394,   400,
-     401,   403,   404,   405,   406,   407,   408,   411,   417,   418,
-     420,   421,   422,   423,   424,   425,   428
+     222,   223,   224,   225,   226,   229,   234,   241,   242,   244,
+     245,   246,   247,   248,   251,   257,   265,   273,   279,   280,
+     282,   283,   284,   287,   297,   303,   304,   306,   307,   308,
+     309,   310,   311,   312,   313,   316,   322,   323,   325,   327,
+     330,   335,   341,   342,   344,   345,   346,   349,   355,   356,
+     358,   359,   360,   361,   362,   363,   366,   372,   373,   375,
+     376,   377,   378,   379,   382,   388,   389,   391,   392,   393,
+     394,   397,   403,   404,   406,   407,   408,   409,   410,   411,
+     414,   420,   421,   423,   424,   425,   426,   427,   428,   431
 };
 #endif
 
@@ -716,7 +716,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-39)
+#define YYPACT_NINF (-24)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -730,36 +730,37 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      -3,     0,   -23,    -4,    97,     3,     8,    79,   -39,    10,
-      20,    83,    28,   -12,    35,    59,    12,    98,   -14,    -5,
-      17,   -39,    38,    67,    93,   -39,    81,   -39,   -39,   -39,
-     -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,
-     -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,
-     -39,   -39,    34,    47,    80,    82,     0,   -39,    84,   -39,
-      85,    86,    87,    88,    89,    90,    91,    92,    -4,   -39,
-      94,    95,    97,   -39,    96,    99,   100,   101,     8,   -39,
-     102,   103,   104,    79,   -39,    74,    76,   105,   106,   107,
-      83,   -39,   108,   109,   110,   111,   -39,   -12,   -39,   112,
-      35,   -39,   113,    59,   -39,   116,   117,    12,   -39,   118,
-     119,    98,   -39,   120,   -39,   -14,   -39,   121,   122,    -5,
-     -39,   123,   124,    17,   -39,   125,   126,   -39,   -39,   127,
-     128,   129,   130,    93,   -39,   -39,    -1,   131,   132,   133,
-     -39,     2,   134,     5,   135,    77,   136,   142,   138,   139,
-     -39,   140,    11,   -39,   141,   143,   144,   145,   -39,   146,
-     147,   148,   -39,   -39,   -39,   149,   150,   151,   -39,   -39,
-      14,    15,   157,   -39,   137,   -39,    23,   -39,    24,    27,
-     -39,    52,    33,   -39,    36,   -39,    37,    61,   -39,    45,
-      65,   -39,   153,    46,   154,   155,    49,   -38,   -39,   158,
-     -39,   -39,   -39,   -39,   -39,   159,   -39,   -39,   -39,   160,
-     -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,
-     161,   -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39,
-     -39,   -39,   -39,   162,   -39,   -39,   163,   -39,   -39,   -39,
-      55,   164,   -39,   -39,   165,   -39,   -39,   166,   -39,   -39,
-     -39,   -39,   167,   -39,   -39,   168,   -39,   -39,   169,   -39,
-     -39,   -39,   -39,   170,   -39,   -39,   -39,   -39,   -39,   171,
-     -39,   -39,   -39,   -39,   172,   -39,   -39,   -39,   -39,   -39,
-     -39,   -39,   -39,   -39,   -39,   173,   -39,   -39,   -39,   -39,
-     -39,   -39,   -39,   -39,   -39,   -39,   -39,   -39
+      -3,     0,   -23,    -4,    95,    -9,     8,    83,   -24,   -11,
+       4,    98,     3,   -12,    39,    22,    12,   107,   -14,    -5,
+      17,   -24,    38,    63,   100,   -24,    76,   -24,   -24,   -24,
+     -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,
+     -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,
+     -24,   -24,    29,    51,    85,    89,     0,   -24,    90,   -24,
+      91,    92,    93,    94,    96,    97,    99,   101,    -4,   -24,
+     102,   103,    95,   -24,   104,   105,   106,   108,     8,   -24,
+     109,   110,   111,    83,   -24,   -10,    43,   112,   113,   114,
+      98,   -24,    88,   115,   116,   117,   -24,   -12,   -24,    36,
+      39,   -24,   118,    22,   -24,   119,   120,    12,   -24,   121,
+     122,   107,   -24,   123,   -24,   -14,   -24,   124,   125,    -5,
+     -24,   126,   127,    17,   -24,   128,   129,   -24,   -24,   130,
+     131,   132,   133,   100,   -24,   -24,     5,   134,   135,   136,
+     -24,     6,   137,     9,   138,    86,   139,   145,   141,   142,
+     -24,   143,    15,   -24,   144,   146,   147,   148,   -24,   149,
+      62,    66,   -24,   -24,   -24,   150,   151,   152,   -24,   -24,
+      18,    19,   158,   -24,   140,   -24,    27,   -24,    28,    31,
+     -24,    56,    37,   -24,    40,   -24,    41,    71,   -24,    49,
+      72,   -24,   154,    50,   155,   156,    53,    -1,   -24,   159,
+     -24,   -24,   -24,   -24,   -24,   160,   -24,   -24,   -24,   161,
+     -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,
+     162,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,
+     -24,   -24,   -24,   -24,   -24,   163,   -24,   -24,   164,   -24,
+     -24,   -24,    59,   165,   -24,   -24,   166,   -24,   -24,   167,
+     -24,   -24,   -24,   -24,   168,   -24,   -24,   169,   -24,   -24,
+     170,   -24,   -24,   -24,   -24,   171,   -24,   -24,   -24,   -24,
+     -24,   172,   -24,   -24,   -24,   -24,   173,   -24,   -24,   174,
+     -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   175,   -24,
+     -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24,
+     -24,   -24
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -767,47 +768,48 @@ static const yytype_int16 yypact[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     0,     0,     0,     0,     0,     0,     0,    91,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    94,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,   166,     0,     0,     0,    84,     0,     2,     6,     5,
+       0,   169,     0,     0,     0,    85,     0,     2,     6,     5,
        7,     8,     9,    10,     3,     4,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,     0,     0,     0,     0,    27,    29,     0,    36,
        0,     0,     0,     0,     0,     0,     0,     0,    40,    42,
        0,     0,    54,    56,     0,     0,     0,     0,    62,    64,
-       0,     0,     0,    85,    87,     0,     0,     0,     0,     0,
-      94,    96,     0,     0,     0,     0,   107,   101,   103,     0,
-     112,   114,     0,   118,   120,     0,     0,   124,   126,     0,
-       0,   133,   135,     0,   147,   141,   143,     0,     0,   148,
-     150,     0,     0,   157,   159,     0,     0,    69,    70,     0,
+       0,     0,     0,    86,    88,     0,     0,     0,     0,     0,
+      97,    99,     0,     0,     0,     0,   110,   104,   106,     0,
+     115,   117,     0,   121,   123,     0,     0,   127,   129,     0,
+       0,   136,   138,     0,   150,   144,   146,     0,     0,   151,
+     153,     0,     0,   160,   162,     0,     0,    69,    70,     0,
        0,     0,     0,    74,    76,     1,     0,     0,     0,     0,
       28,     0,     0,     0,     0,     0,     0,     0,     0,     0,
       41,     0,     0,    55,     0,     0,     0,     0,    63,     0,
-       0,     0,    86,    92,    93,     0,     0,     0,    95,   100,
-       0,     0,     0,   102,     0,   113,     0,   119,     0,     0,
-     125,     0,     0,   134,     0,   142,     0,     0,   149,     0,
-       0,   158,     0,     0,     0,     0,     0,     0,    75,     0,
+       0,     0,    87,    95,    96,     0,     0,     0,    98,   103,
+       0,     0,     0,   105,     0,   116,     0,   122,     0,     0,
+     128,     0,     0,   137,     0,   145,     0,     0,   152,     0,
+       0,   161,     0,     0,     0,     0,     0,     0,    75,     0,
       33,    35,    30,    31,    32,     0,    37,    39,    45,     0,
       47,    49,    51,    53,    52,    50,    43,    44,    46,    60,
-       0,    58,    57,    61,    65,    66,    67,    90,    89,    88,
-      98,    97,    99,     0,   104,   106,     0,   109,   111,   108,
-       0,     0,   121,   123,     0,   127,   129,     0,   130,   132,
-     139,   140,     0,   136,   138,     0,   144,   146,   154,   151,
-     153,   156,   155,   163,   160,   162,   165,   164,    68,     0,
-      71,    73,    77,    81,     0,    78,    80,    83,    82,    34,
-      38,    48,    59,   105,   110,     0,   115,   117,   122,   128,
-     131,   137,   145,   152,   161,    72,    79,   116
+       0,    58,    57,    61,    65,    66,    67,    93,    91,    92,
+      89,    90,   101,   100,   102,     0,   107,   109,     0,   112,
+     114,   111,     0,     0,   124,   126,     0,   130,   132,     0,
+     133,   135,   142,   143,     0,   139,   141,     0,   147,   149,
+     157,   154,   156,   159,   158,   166,   163,   165,   168,   167,
+      68,     0,    71,    73,    77,    81,     0,    78,    80,     0,
+      83,    82,    34,    38,    48,    59,   108,   113,     0,   118,
+     120,   125,   131,   134,   140,   148,   155,   164,    72,    79,
+      84,   119
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -39,   -39,   -39,   -39,   180,   -39,   -39,   -39,   -39,   174,
-     -39,   -39,   115,   -39,   -39,   -39,    71,   -39,   -39,   -39,
-     -39,   -39,   -39,    21,   -39,   -39,   -39,    70,   -39,   -39,
-     -39,   -39,   -39,    78,   -39,   -39,   -39,   152,   -39,   -39,
-      64,   -39,   -39,   156,   -39,   -39,   175,   -39,   -39,   176,
-     -39,   -39,    73,   -39,   -39,    72,   -39,   -39,    69,   -39
+     -24,   -24,   -24,   -24,   182,   -24,   -24,   -24,   -24,   176,
+     -24,   -24,    82,   -24,   -24,   -24,    78,   -24,   -24,   -24,
+     -24,   -24,   -24,    30,   -24,   -24,   -24,   157,   -24,   -24,
+     -24,   -24,   -24,   153,   -24,   -24,   -24,   177,   -24,   -24,
+     178,   -24,   -24,    87,   -24,   -24,    84,   -24,   -24,   179,
+     -24,   -24,    79,   -24,   -24,    74,   -24,   -24,   180,   -24
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -828,66 +830,70 @@ static const yytype_int16 yytable[] =
 {
        1,     2,     3,     4,     5,     6,     7,     8,     9,    10,
       11,    12,    58,    13,    14,    15,    16,    17,    18,    19,
-      20,   113,   277,    93,    21,   278,    22,    23,    24,    60,
-     117,    61,    94,    62,    63,    52,    95,    74,   114,    64,
-      96,   118,    75,    85,    65,    66,    67,   105,    53,    54,
-      55,    76,   121,    86,   199,    77,   106,   205,    25,   200,
-     209,   201,   206,   122,   207,   210,   220,   211,    92,   233,
-     236,   221,   125,   222,   234,   237,   235,   238,   241,   244,
-      99,   135,   247,   242,   245,   243,   246,   248,   252,   249,
-     136,   255,   258,   253,   102,   254,   256,   259,   257,   260,
-     263,   269,   126,   137,   274,   264,   270,   265,   271,   275,
-     285,   276,   250,    80,   251,   286,   261,   287,    81,    82,
-     266,   262,    87,    88,    89,   267,   129,   130,   131,   132,
-      70,   109,    71,   110,   213,   214,   138,   163,   139,   164,
-     141,   142,   143,   144,   145,   146,   147,   148,   149,   158,
-     151,   152,   154,   162,   198,   155,   156,   157,   159,   160,
-     161,   165,   166,   167,   175,   170,   171,   172,   168,   176,
-     174,   169,   178,   179,   181,   182,   184,   186,   187,   189,
-     190,   192,   193,   194,   195,   196,   197,   153,   185,   202,
-       0,   188,   191,   240,     0,   203,   204,   208,   212,   215,
-     216,   217,   218,   219,   223,     0,   224,   225,   226,   227,
-     228,   229,   230,   231,   232,   239,   268,   272,   273,     0,
-     279,   280,   281,   282,   283,   284,   288,   289,   290,   291,
-     292,   293,   294,   295,   296,   297,   140,     0,     0,     0,
-       0,     0,   150,     0,     0,     0,     0,     0,     0,   173,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,   177,
+      20,   113,    85,    93,    21,    74,    22,    23,    24,    60,
+     117,    61,    94,    62,    63,    52,    95,    86,   114,    64,
+      96,   118,    75,    92,    65,    66,    67,   105,    53,    54,
+      55,    76,   121,   163,   279,    77,   106,   102,    25,   280,
+     199,   205,   281,   122,   209,   200,   206,   201,   207,   210,
+     220,   211,   125,   235,   238,   221,   135,   222,   236,   239,
+     237,   240,   243,   246,    99,   136,   249,   244,   247,   245,
+     248,   250,   254,   251,   174,   257,   260,   255,   126,   256,
+     258,   261,   259,   262,   265,   271,   164,   137,   276,   266,
+     272,   267,   273,   277,   288,   278,   252,    80,   253,   289,
+     228,   290,    81,    82,   230,   229,   263,   268,    70,   231,
+      71,   264,   269,   129,   130,   131,   132,    87,    88,    89,
+     109,   138,   110,   213,   214,   139,   141,   142,   143,   144,
+     145,   169,   146,   147,   153,   148,   158,   149,   151,   152,
+     154,   155,   156,   198,   157,   159,   160,   161,   165,   166,
+     167,   170,   171,   172,   176,   178,   179,   181,   182,   184,
+     186,   187,   189,   190,   192,   193,   194,   195,   196,   197,
+     177,   180,   202,   188,   185,     0,   242,     0,   203,   204,
+     208,   212,   215,   216,   217,   218,   219,   223,     0,   224,
+     225,   226,   227,   232,   233,   234,   241,   270,   274,   275,
+       0,   282,   283,   284,   285,   286,   287,   291,   292,   293,
+     294,   295,   296,   297,   298,   299,   300,   301,   140,     0,
+     162,     0,     0,   168,   150,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,   180,     0,     0,     0,     0,   183
+       0,     0,     0,     0,   173,     0,     0,     0,   175,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+     183,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,   191
 };
 
 static const yytype_int16 yycheck[] =
 {
        3,     4,     5,     6,     7,     8,     9,    10,    11,    12,
       13,    14,    35,    16,    17,    18,    19,    20,    21,    22,
-      23,    35,    60,    35,    27,    63,    29,    30,    31,    33,
-      35,    35,    44,    37,    38,    35,    48,    34,    52,    43,
-      52,    46,    34,    33,    48,    49,    50,    35,    48,    49,
-      50,    43,    35,    33,    55,    47,    44,    55,    61,    60,
-      55,    62,    60,    46,    62,    60,    55,    62,    40,    55,
-      55,    60,    34,    62,    60,    60,    62,    62,    55,    55,
-      45,     0,    55,    60,    60,    62,    62,    60,    55,    62,
-      56,    55,    55,    60,    35,    62,    60,    60,    62,    62,
-      55,    55,    35,    56,    55,    60,    60,    62,    62,    60,
-      55,    62,    60,    34,    62,    60,    55,    62,    39,    40,
-      55,    60,    39,    40,    41,    60,    33,    34,    35,    36,
-      33,    33,    35,    35,    57,    58,    56,    63,    56,    63,
-      56,    56,    56,    56,    56,    56,    56,    56,    56,    78,
-      56,    56,    56,    83,   133,    56,    56,    56,    56,    56,
-      56,    56,    56,    56,   100,    56,    56,    56,    90,    56,
-      58,    63,    56,    56,    56,    56,    56,    56,    56,    56,
-      56,    56,    56,    56,    56,    56,    56,    72,   115,    58,
-      -1,   119,   123,    56,    -1,    63,    63,    63,    63,    63,
-      58,    63,    63,    63,    63,    -1,    63,    63,    63,    63,
-      63,    63,    63,    63,    63,    58,    63,    63,    63,    -1,
-      62,    62,    62,    62,    62,    62,    62,    62,    62,    62,
-      62,    62,    62,    62,    62,    62,    56,    -1,    -1,    -1,
-      -1,    -1,    68,    -1,    -1,    -1,    -1,    -1,    -1,    97,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,   103,
+      23,    35,    33,    35,    27,    34,    29,    30,    31,    33,
+      35,    35,    44,    37,    38,    35,    48,    33,    52,    43,
+      52,    46,    34,    40,    48,    49,    50,    35,    48,    49,
+      50,    43,    35,    63,    55,    47,    44,    35,    61,    60,
+      55,    55,    63,    46,    55,    60,    60,    62,    62,    60,
+      55,    62,    34,    55,    55,    60,     0,    62,    60,    60,
+      62,    62,    55,    55,    45,    56,    55,    60,    60,    62,
+      62,    60,    55,    62,    58,    55,    55,    60,    35,    62,
+      60,    60,    62,    62,    55,    55,    63,    56,    55,    60,
+      60,    62,    62,    60,    55,    62,    60,    34,    62,    60,
+      58,    62,    39,    40,    58,    63,    55,    55,    33,    63,
+      35,    60,    60,    33,    34,    35,    36,    39,    40,    41,
+      33,    56,    35,    57,    58,    56,    56,    56,    56,    56,
+      56,    63,    56,    56,    72,    56,    78,    56,    56,    56,
+      56,    56,    56,   133,    56,    56,    56,    56,    56,    56,
+      56,    56,    56,    56,    56,    56,    56,    56,    56,    56,
+      56,    56,    56,    56,    56,    56,    56,    56,    56,    56,
+     103,   107,    58,   119,   115,    -1,    56,    -1,    63,    63,
+      63,    63,    63,    58,    63,    63,    63,    63,    -1,    63,
+      63,    63,    63,    63,    63,    63,    58,    63,    63,    63,
+      -1,    62,    62,    62,    62,    62,    62,    62,    62,    62,
+      62,    62,    62,    62,    62,    62,    62,    62,    56,    -1,
+      83,    -1,    -1,    90,    68,    -1,    -1,    -1,    -1,    -1,
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,   107,    -1,    -1,    -1,    -1,   111
+      -1,    -1,    -1,    -1,    97,    -1,    -1,    -1,   100,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+     111,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,   123
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -916,14 +922,15 @@ static const yytype_int8 yystos[] =
       56,   122,    56,    56,    56,    56,    56,    56,    87,    55,
       60,    62,    58,    63,    63,    55,    60,    62,    63,    55,
       60,    62,    63,    57,    58,    63,    58,    63,    63,    63,
-      55,    60,    62,    63,    63,    63,    63,    63,    63,    63,
-      63,    63,    63,    55,    60,    62,    55,    60,    62,    58,
-      56,    55,    60,    62,    55,    60,    62,    55,    60,    62,
-      60,    62,    55,    60,    62,    55,    60,    62,    55,    60,
-      62,    55,    60,    55,    60,    62,    55,    60,    63,    55,
-      60,    62,    63,    63,    55,    60,    62,    60,    63,    62,
-      62,    62,    62,    62,    62,    55,    60,    62,    62,    62,
-      62,    62,    62,    62,    62,    62,    62,    62
+      55,    60,    62,    63,    63,    63,    63,    63,    58,    63,
+      58,    63,    63,    63,    63,    55,    60,    62,    55,    60,
+      62,    58,    56,    55,    60,    62,    55,    60,    62,    55,
+      60,    62,    60,    62,    55,    60,    62,    55,    60,    62,
+      55,    60,    62,    55,    60,    55,    60,    62,    55,    60,
+      63,    55,    60,    62,    63,    63,    55,    60,    62,    55,
+      60,    63,    62,    62,    62,    62,    62,    62,    55,    60,
+      62,    62,    62,    62,    62,    62,    62,    62,    62,    62,
+      62,    62
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
@@ -937,15 +944,15 @@ static const yytype_int8 yyr1[] =
       73,    73,    73,    73,    74,    75,    75,    76,    76,    76,
       76,    77,    78,    79,    79,    80,    80,    80,    81,    82,
       83,    84,    84,    84,    85,    86,    86,    87,    87,    87,
-      87,    87,    87,    87,    88,    89,    90,    90,    91,    91,
-      91,    92,    93,    94,    95,    96,    96,    97,    97,    97,
-      98,    99,   100,   100,   101,   101,   101,   101,   101,   101,
-     101,   101,   102,   103,   103,   104,   104,   104,   105,   106,
-     106,   107,   107,   107,   108,   109,   109,   110,   110,   110,
-     110,   110,   110,   111,   112,   112,   113,   113,   113,   113,
-     113,   114,   115,   115,   116,   116,   116,   116,   117,   118,
-     118,   119,   119,   119,   119,   119,   119,   120,   121,   121,
-     122,   122,   122,   122,   122,   122,   123
+      87,    87,    87,    87,    87,    88,    89,    90,    90,    91,
+      91,    91,    91,    91,    92,    93,    94,    95,    96,    96,
+      97,    97,    97,    98,    99,   100,   100,   101,   101,   101,
+     101,   101,   101,   101,   101,   102,   103,   103,   104,   104,
+     104,   105,   106,   106,   107,   107,   107,   108,   109,   109,
+     110,   110,   110,   110,   110,   110,   111,   112,   112,   113,
+     113,   113,   113,   113,   114,   115,   115,   116,   116,   116,
+     116,   117,   118,   118,   119,   119,   119,   119,   119,   119,
+     120,   121,   121,   122,   122,   122,   122,   122,   122,   123
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -959,15 +966,15 @@ static const yytype_int8 yyr2[] =
        3,     3,     3,     3,     2,     2,     1,     3,     3,     4,
        3,     4,     2,     2,     1,     3,     3,     3,     4,     2,
        1,     3,     4,     3,     2,     2,     1,     3,     3,     4,
-       3,     3,     3,     3,     1,     2,     2,     1,     3,     3,
-       3,     1,     3,     3,     2,     2,     1,     3,     3,     3,
-       3,     2,     2,     1,     3,     4,     3,     1,     3,     3,
-       4,     3,     2,     2,     1,     4,     5,     4,     2,     2,
-       1,     3,     4,     3,     2,     2,     1,     3,     4,     3,
-       3,     4,     3,     2,     2,     1,     3,     4,     3,     3,
-       3,     2,     2,     1,     3,     4,     3,     1,     2,     2,
-       1,     3,     4,     3,     3,     3,     3,     2,     2,     1,
-       3,     4,     3,     3,     3,     3,     1
+       3,     3,     3,     3,     4,     1,     2,     2,     1,     3,
+       3,     3,     3,     3,     1,     3,     3,     2,     2,     1,
+       3,     3,     3,     3,     2,     2,     1,     3,     4,     3,
+       1,     3,     3,     4,     3,     2,     2,     1,     4,     5,
+       4,     2,     2,     1,     3,     4,     3,     2,     2,     1,
+       3,     4,     3,     3,     4,     3,     2,     2,     1,     3,
+       4,     3,     3,     3,     2,     2,     1,     3,     4,     3,
+       1,     2,     2,     1,     3,     4,     3,     3,     3,     3,
+       2,     2,     1,     3,     4,     3,     3,     3,     3,     1
 };
 
 
@@ -1433,151 +1440,151 @@ yyreduce:
   case 2: /* inicio: mkdisk  */
 #line 68 "parser.y"
                     {  }
-#line 1437 "parser.cpp"
+#line 1444 "parser.cpp"
     break;
 
   case 3: /* inicio: execute  */
 #line 69 "parser.y"
                     {  }
-#line 1443 "parser.cpp"
+#line 1450 "parser.cpp"
     break;
 
   case 4: /* inicio: rep  */
 #line 70 "parser.y"
                     {  }
-#line 1449 "parser.cpp"
+#line 1456 "parser.cpp"
     break;
 
   case 5: /* inicio: fdisk  */
 #line 71 "parser.y"
                     {  }
-#line 1455 "parser.cpp"
+#line 1462 "parser.cpp"
     break;
 
   case 6: /* inicio: rmdisk  */
 #line 72 "parser.y"
                     {  }
-#line 1461 "parser.cpp"
+#line 1468 "parser.cpp"
     break;
 
   case 7: /* inicio: mount  */
 #line 73 "parser.y"
                     {  }
-#line 1467 "parser.cpp"
+#line 1474 "parser.cpp"
     break;
 
   case 8: /* inicio: unmount  */
 #line 74 "parser.y"
                     {  }
-#line 1473 "parser.cpp"
+#line 1480 "parser.cpp"
     break;
 
   case 9: /* inicio: mkfs  */
 #line 75 "parser.y"
                     {  }
-#line 1479 "parser.cpp"
+#line 1486 "parser.cpp"
     break;
 
   case 10: /* inicio: loss  */
 #line 76 "parser.y"
                     {  }
-#line 1485 "parser.cpp"
+#line 1492 "parser.cpp"
     break;
 
   case 11: /* inicio: comentario  */
 #line 77 "parser.y"
                     {  }
-#line 1491 "parser.cpp"
+#line 1498 "parser.cpp"
     break;
 
   case 12: /* inicio: login  */
 #line 78 "parser.y"
                     {  }
-#line 1497 "parser.cpp"
+#line 1504 "parser.cpp"
     break;
 
   case 13: /* inicio: logout  */
 #line 79 "parser.y"
                     {  }
-#line 1503 "parser.cpp"
+#line 1510 "parser.cpp"
     break;
 
   case 14: /* inicio: mkgrp  */
 #line 80 "parser.y"
                     {  }
-#line 1509 "parser.cpp"
+#line 1516 "parser.cpp"
     break;
 
   case 15: /* inicio: rmgrp  */
 #line 81 "parser.y"
                     {  }
-#line 1515 "parser.cpp"
+#line 1522 "parser.cpp"
     break;
 
   case 16: /* inicio: mkusr  */
 #line 82 "parser.y"
                     {  }
-#line 1521 "parser.cpp"
+#line 1528 "parser.cpp"
     break;
 
   case 17: /* inicio: rmusr  */
 #line 83 "parser.y"
                     {  }
-#line 1527 "parser.cpp"
+#line 1534 "parser.cpp"
     break;
 
   case 18: /* inicio: mkfile  */
 #line 85 "parser.y"
                     {  }
-#line 1533 "parser.cpp"
+#line 1540 "parser.cpp"
     break;
 
   case 19: /* inicio: cat  */
 #line 86 "parser.y"
                     {  }
-#line 1539 "parser.cpp"
+#line 1546 "parser.cpp"
     break;
 
   case 20: /* inicio: remove  */
 #line 87 "parser.y"
                     {  }
-#line 1545 "parser.cpp"
+#line 1552 "parser.cpp"
     break;
 
   case 21: /* inicio: edit  */
 #line 88 "parser.y"
                     {  }
-#line 1551 "parser.cpp"
+#line 1558 "parser.cpp"
     break;
 
   case 22: /* inicio: rename  */
 #line 89 "parser.y"
                     {  }
-#line 1557 "parser.cpp"
+#line 1564 "parser.cpp"
     break;
 
   case 23: /* inicio: mkdir  */
 #line 90 "parser.y"
                     {  }
-#line 1563 "parser.cpp"
+#line 1570 "parser.cpp"
     break;
 
   case 24: /* inicio: copy  */
 #line 91 "parser.y"
                     {  }
-#line 1569 "parser.cpp"
+#line 1576 "parser.cpp"
     break;
 
   case 25: /* inicio: move  */
 #line 92 "parser.y"
                     {  }
-#line 1575 "parser.cpp"
+#line 1582 "parser.cpp"
     break;
 
   case 26: /* inicio: pause  */
 #line 96 "parser.y"
                     {  }
-#line 1581 "parser.cpp"
+#line 1588 "parser.cpp"
     break;
 
   case 27: /* mkdisk: T_MKDISK lp_mkdisk  */
@@ -1588,43 +1595,43 @@ Mkdisk mkdisk(size, fit, unit, path);
     mkdisk.ejecutarComando();
     limpiarVariables();
 }
-#line 1592 "parser.cpp"
+#line 1599 "parser.cpp"
     break;
 
   case 30: /* p_mkdisk: T_G_S T_IGUAL T_NUMEROP  */
 #line 111 "parser.y"
                                     { size = std::string((yyvsp[0].val));  }
-#line 1598 "parser.cpp"
+#line 1605 "parser.cpp"
     break;
 
   case 31: /* p_mkdisk: T_G_F T_IGUAL T_ID  */
 #line 112 "parser.y"
                                  { fit = std::string((yyvsp[0].val));}
-#line 1604 "parser.cpp"
+#line 1611 "parser.cpp"
     break;
 
   case 32: /* p_mkdisk: T_G_U T_IGUAL T_ID  */
 #line 113 "parser.y"
                                  { unit = std::string((yyvsp[0].val));}
-#line 1610 "parser.cpp"
+#line 1617 "parser.cpp"
     break;
 
   case 33: /* p_mkdisk: T_G_PATH T_IGUAL T_CADENA  */
 #line 114 "parser.y"
                                         { path = std::string((yyvsp[0].val));}
-#line 1616 "parser.cpp"
+#line 1623 "parser.cpp"
     break;
 
   case 34: /* p_mkdisk: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 115 "parser.y"
                                                 { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 1622 "parser.cpp"
+#line 1629 "parser.cpp"
     break;
 
   case 35: /* p_mkdisk: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 116 "parser.y"
                                          { path = std::string((yyvsp[0].val)); }
-#line 1628 "parser.cpp"
+#line 1635 "parser.cpp"
     break;
 
   case 36: /* rmdisk: T_RMDISK p_rmdisk  */
@@ -1634,25 +1641,25 @@ Mkdisk mkdisk(size, fit, unit, path);
     rmdisk.ejecutarComando();
     limpiarVariables();
 }
-#line 1638 "parser.cpp"
+#line 1645 "parser.cpp"
     break;
 
   case 37: /* p_rmdisk: T_G_PATH T_IGUAL T_CADENA  */
 #line 125 "parser.y"
                                       { path = std::string((yyvsp[0].val)); }
-#line 1644 "parser.cpp"
+#line 1651 "parser.cpp"
     break;
 
   case 38: /* p_rmdisk: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 126 "parser.y"
                                                 { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val)); }
-#line 1650 "parser.cpp"
+#line 1657 "parser.cpp"
     break;
 
   case 39: /* p_rmdisk: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 127 "parser.y"
                                          { path = std::string((yyvsp[0].val)); }
-#line 1656 "parser.cpp"
+#line 1663 "parser.cpp"
     break;
 
   case 40: /* fdisk: T_FDISK lp_fdisk  */
@@ -1662,73 +1669,73 @@ Mkdisk mkdisk(size, fit, unit, path);
     fdisk.ejecutarComando();
     limpiarVariables();
 }
-#line 1666 "parser.cpp"
+#line 1673 "parser.cpp"
     break;
 
   case 43: /* p_fdisk: T_G_S T_IGUAL T_NUMEROP  */
 #line 139 "parser.y"
                                     { size = std::string((yyvsp[0].val)); }
-#line 1672 "parser.cpp"
+#line 1679 "parser.cpp"
     break;
 
   case 44: /* p_fdisk: T_G_F T_IGUAL T_ID  */
 #line 140 "parser.y"
                                  { fit = std::string((yyvsp[0].val));}
-#line 1678 "parser.cpp"
+#line 1685 "parser.cpp"
     break;
 
   case 45: /* p_fdisk: T_G_NAME T_IGUAL T_ID  */
 #line 141 "parser.y"
                                     { name = std::string((yyvsp[0].val));}
-#line 1684 "parser.cpp"
+#line 1691 "parser.cpp"
     break;
 
   case 46: /* p_fdisk: T_G_U T_IGUAL T_ID  */
 #line 142 "parser.y"
                                  { unit = std::string((yyvsp[0].val));}
-#line 1690 "parser.cpp"
+#line 1697 "parser.cpp"
     break;
 
   case 47: /* p_fdisk: T_G_PATH T_IGUAL T_CADENA  */
 #line 143 "parser.y"
                                         { path = std::string((yyvsp[0].val));}
-#line 1696 "parser.cpp"
+#line 1703 "parser.cpp"
     break;
 
   case 48: /* p_fdisk: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 144 "parser.y"
                                                 { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 1702 "parser.cpp"
+#line 1709 "parser.cpp"
     break;
 
   case 49: /* p_fdisk: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 145 "parser.y"
                                          { path = std::string((yyvsp[0].val)); }
-#line 1708 "parser.cpp"
+#line 1715 "parser.cpp"
     break;
 
   case 50: /* p_fdisk: T_G_TYPE T_IGUAL T_ID  */
 #line 146 "parser.y"
                                     { tipo = std::string((yyvsp[0].val)); }
-#line 1714 "parser.cpp"
+#line 1721 "parser.cpp"
     break;
 
   case 51: /* p_fdisk: T_G_DELETE T_IGUAL T_ID  */
 #line 147 "parser.y"
                                       { tipo = std::string((yyvsp[0].val));}
-#line 1720 "parser.cpp"
+#line 1727 "parser.cpp"
     break;
 
   case 52: /* p_fdisk: T_G_ADD T_IGUAL T_NUMEROP  */
 #line 148 "parser.y"
                                         { add = std::string((yyvsp[0].val));}
-#line 1726 "parser.cpp"
+#line 1733 "parser.cpp"
     break;
 
   case 53: /* p_fdisk: T_G_ADD T_IGUAL T_NUMERON  */
 #line 149 "parser.y"
                                         { add = std::string((yyvsp[0].val));}
-#line 1732 "parser.cpp"
+#line 1739 "parser.cpp"
     break;
 
   case 54: /* mount: T_MOUNT lp_mount  */
@@ -1738,31 +1745,31 @@ Mkdisk mkdisk(size, fit, unit, path);
     mount.ejecutarComando();
     limpiarVariables();
 }
-#line 1742 "parser.cpp"
+#line 1749 "parser.cpp"
     break;
 
   case 57: /* p_mount: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 161 "parser.y"
                                        { path = std::string((yyvsp[0].val)); }
-#line 1748 "parser.cpp"
+#line 1755 "parser.cpp"
     break;
 
   case 58: /* p_mount: T_G_PATH T_IGUAL T_CADENA  */
 #line 162 "parser.y"
                                         { path = std::string((yyvsp[0].val));}
-#line 1754 "parser.cpp"
+#line 1761 "parser.cpp"
     break;
 
   case 59: /* p_mount: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 163 "parser.y"
                                                 { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 1760 "parser.cpp"
+#line 1767 "parser.cpp"
     break;
 
   case 60: /* p_mount: T_G_NAME T_IGUAL T_ID  */
 #line 164 "parser.y"
                                     { name = std::string((yyvsp[0].val)); }
-#line 1766 "parser.cpp"
+#line 1773 "parser.cpp"
     break;
 
   case 61: /* unmount: T_UNMOUNT T_G_ID T_IGUAL T_ID  */
@@ -1773,7 +1780,7 @@ Mkdisk mkdisk(size, fit, unit, path);
     unmount.ejecutarComando();
     limpiarVariables();
 }
-#line 1777 "parser.cpp"
+#line 1784 "parser.cpp"
     break;
 
   case 62: /* mkfs: T_MKFS lp_mkfs  */
@@ -1783,25 +1790,25 @@ Mkdisk mkdisk(size, fit, unit, path);
     mkfs.ejecutarComando();
     limpiarVariables();
 }
-#line 1787 "parser.cpp"
+#line 1794 "parser.cpp"
     break;
 
   case 65: /* p_mkfs: T_G_ID T_IGUAL T_ID  */
 #line 184 "parser.y"
                                 { id = std::string((yyvsp[0].val)); }
-#line 1793 "parser.cpp"
+#line 1800 "parser.cpp"
     break;
 
   case 66: /* p_mkfs: T_G_TYPE T_IGUAL T_ID  */
 #line 185 "parser.y"
                                    { tipo = std::string((yyvsp[0].val));}
-#line 1799 "parser.cpp"
+#line 1806 "parser.cpp"
     break;
 
   case 67: /* p_mkfs: T_G_FS T_IGUAL T_ID  */
 #line 186 "parser.y"
                                  { tipo = std::string((yyvsp[0].val)); }
-#line 1805 "parser.cpp"
+#line 1812 "parser.cpp"
     break;
 
   case 68: /* loss: T_LOSS T_G_ID T_IGUAL T_ID  */
@@ -1812,7 +1819,7 @@ Mkdisk mkdisk(size, fit, unit, path);
     loss.ejecutarComando();
     limpiarVariables();
 }
-#line 1816 "parser.cpp"
+#line 1823 "parser.cpp"
     break;
 
   case 69: /* execute: T_EXEC lp_execute  */
@@ -1822,25 +1829,25 @@ Mkdisk mkdisk(size, fit, unit, path);
     execute.ejecutarComando();
     limpiarVariables();
 }
-#line 1826 "parser.cpp"
+#line 1833 "parser.cpp"
     break;
 
   case 71: /* p_execute: T_G_PATH T_IGUAL T_CADENA  */
 #line 205 "parser.y"
                                       { path = std::string((yyvsp[0].val));}
-#line 1832 "parser.cpp"
+#line 1839 "parser.cpp"
     break;
 
   case 72: /* p_execute: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 206 "parser.y"
                                                 { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 1838 "parser.cpp"
+#line 1845 "parser.cpp"
     break;
 
   case 73: /* p_execute: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 207 "parser.y"
                                          { path = std::string((yyvsp[0].val)); }
-#line 1844 "parser.cpp"
+#line 1851 "parser.cpp"
     break;
 
   case 74: /* rep: T_REP lp_rep  */
@@ -1850,498 +1857,516 @@ Mkdisk mkdisk(size, fit, unit, path);
     rep.ejecutarComando(); 
     limpiarVariables();
 }
-#line 1854 "parser.cpp"
+#line 1861 "parser.cpp"
     break;
 
   case 77: /* p_rep: T_G_NAME T_IGUAL T_ID  */
 #line 219 "parser.y"
                               { name = std::string((yyvsp[0].val)); }
-#line 1860 "parser.cpp"
+#line 1867 "parser.cpp"
     break;
 
   case 78: /* p_rep: T_G_PATH T_IGUAL T_CADENA  */
 #line 220 "parser.y"
                                     { path = std::string((yyvsp[0].val));}
-#line 1866 "parser.cpp"
+#line 1873 "parser.cpp"
     break;
 
   case 79: /* p_rep: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 221 "parser.y"
                                             { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 1872 "parser.cpp"
+#line 1879 "parser.cpp"
     break;
 
   case 80: /* p_rep: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 222 "parser.y"
                                      { path = std::string((yyvsp[0].val)); }
-#line 1878 "parser.cpp"
+#line 1885 "parser.cpp"
     break;
 
   case 81: /* p_rep: T_G_ID T_IGUAL T_ID  */
 #line 223 "parser.y"
                               { id = std::string((yyvsp[0].val)); }
-#line 1884 "parser.cpp"
+#line 1891 "parser.cpp"
     break;
 
   case 82: /* p_rep: T_G_RUTA T_IGUAL T_ID  */
 #line 224 "parser.y"
                                 {ruta = std::string((yyvsp[0].val));}
-#line 1890 "parser.cpp"
+#line 1897 "parser.cpp"
     break;
 
   case 83: /* p_rep: T_G_RUTA T_IGUAL T_CADENA  */
 #line 225 "parser.y"
                                     {ruta = std::string((yyvsp[0].val));}
-#line 1896 "parser.cpp"
+#line 1903 "parser.cpp"
     break;
 
-  case 84: /* comentario: T_COMENTARIO  */
-#line 228 "parser.y"
+  case 84: /* p_rep: T_G_RUTA T_IGUAL T_RUTA T_ARCHIVO  */
+#line 226 "parser.y"
+                                            { ruta = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
+#line 1909 "parser.cpp"
+    break;
+
+  case 85: /* comentario: T_COMENTARIO  */
+#line 229 "parser.y"
                          { /*std::cout<<std::string($1)<<std::endl;*/}
-#line 1902 "parser.cpp"
+#line 1915 "parser.cpp"
     break;
 
-  case 85: /* login: T_LOGIN lp_login  */
-#line 233 "parser.y"
+  case 86: /* login: T_LOGIN lp_login  */
+#line 234 "parser.y"
                         {
     Login login(user, pass, id);
     login.ejecutarComando();
     limpiarVariables();
 
 }
-#line 1913 "parser.cpp"
+#line 1926 "parser.cpp"
     break;
 
-  case 88: /* p_login: T_G_USR T_IGUAL T_ID  */
-#line 243 "parser.y"
-                                 { user = std::string((yyvsp[0].val)); }
-#line 1919 "parser.cpp"
-    break;
-
-  case 89: /* p_login: T_G_PASS T_IGUAL T_ID  */
+  case 89: /* p_login: T_G_USR T_IGUAL T_NUMEROP  */
 #line 244 "parser.y"
-                                    { pass = std::string((yyvsp[0].val));}
-#line 1925 "parser.cpp"
+                                      { user = std::string((yyvsp[0].val)); }
+#line 1932 "parser.cpp"
     break;
 
-  case 90: /* p_login: T_G_ID T_IGUAL T_ID  */
+  case 90: /* p_login: T_G_USR T_IGUAL T_ID  */
 #line 245 "parser.y"
-                                  { id = std::string((yyvsp[0].val)); }
-#line 1931 "parser.cpp"
+                                   { user = std::string((yyvsp[0].val)); }
+#line 1938 "parser.cpp"
     break;
 
-  case 91: /* logout: T_LOGOUT  */
+  case 91: /* p_login: T_G_PASS T_IGUAL T_NUMEROP  */
+#line 246 "parser.y"
+                                         { pass = std::string((yyvsp[0].val)); }
+#line 1944 "parser.cpp"
+    break;
+
+  case 92: /* p_login: T_G_PASS T_IGUAL T_ID  */
+#line 247 "parser.y"
+                                    { pass = std::string((yyvsp[0].val));}
+#line 1950 "parser.cpp"
+    break;
+
+  case 93: /* p_login: T_G_ID T_IGUAL T_ID  */
 #line 248 "parser.y"
+                                  { id = std::string((yyvsp[0].val)); }
+#line 1956 "parser.cpp"
+    break;
+
+  case 94: /* logout: T_LOGOUT  */
+#line 251 "parser.y"
                      {
     Logout lout;
     lout.ejecutarComando();
 }
-#line 1940 "parser.cpp"
+#line 1965 "parser.cpp"
     break;
 
-  case 92: /* mkgrp: T_MKGRP T_G_NAME T_ID  */
-#line 254 "parser.y"
+  case 95: /* mkgrp: T_MKGRP T_G_NAME T_ID  */
+#line 257 "parser.y"
                               {
     id = std::string((yyvsp[0].val));
     Mkgrp mkgrp(id);
     mkgrp.ejecutarComando();
     limpiarVariables();
 }
-#line 1951 "parser.cpp"
+#line 1976 "parser.cpp"
     break;
 
-  case 93: /* rmgrp: T_RMGRP T_G_NAME T_ID  */
-#line 262 "parser.y"
+  case 96: /* rmgrp: T_RMGRP T_G_NAME T_ID  */
+#line 265 "parser.y"
                              {
     id = std::string((yyvsp[0].val));
     Rmgrp rmgrp(id);
     rmgrp.ejecutarComando();
     limpiarVariables();
 }
-#line 1962 "parser.cpp"
+#line 1987 "parser.cpp"
     break;
 
-  case 94: /* mkusr: T_MKUSR lp_mkusr  */
-#line 270 "parser.y"
+  case 97: /* mkusr: T_MKUSR lp_mkusr  */
+#line 273 "parser.y"
                         {
     Mkusr mkusr(user, pass, grp);
     mkusr.ejecutarComando();
     limpiarVariables();
 }
-#line 1972 "parser.cpp"
+#line 1997 "parser.cpp"
     break;
 
-  case 97: /* p_mkusr: T_G_USR T_IGUAL T_ID  */
-#line 279 "parser.y"
+  case 100: /* p_mkusr: T_G_USR T_IGUAL T_ID  */
+#line 282 "parser.y"
                                  { user = std::string((yyvsp[0].val)); }
-#line 1978 "parser.cpp"
+#line 2003 "parser.cpp"
     break;
 
-  case 98: /* p_mkusr: T_G_PASS T_IGUAL T_ID  */
-#line 280 "parser.y"
+  case 101: /* p_mkusr: T_G_PASS T_IGUAL T_ID  */
+#line 283 "parser.y"
                                     { pass = std::string((yyvsp[0].val));}
-#line 1984 "parser.cpp"
+#line 2009 "parser.cpp"
     break;
 
-  case 99: /* p_mkusr: T_G_GRP T_IGUAL T_ID  */
-#line 281 "parser.y"
-                                   { grp = std::string((yyvsp[0].val)); }
-#line 1990 "parser.cpp"
-    break;
-
-  case 100: /* rmusr: T_RMUSR T_G_USR T_ID  */
+  case 102: /* p_mkusr: T_G_GRP T_IGUAL T_ID  */
 #line 284 "parser.y"
+                                   { grp = std::string((yyvsp[0].val)); }
+#line 2015 "parser.cpp"
+    break;
+
+  case 103: /* rmusr: T_RMUSR T_G_USR T_ID  */
+#line 287 "parser.y"
                              {
     user = std::string((yyvsp[0].val));
     Rmusr rmusr(user);
     rmusr.ejecutarComando();
     limpiarVariables();
 }
-#line 2001 "parser.cpp"
+#line 2026 "parser.cpp"
     break;
 
-  case 101: /* mkfile: T_MKFILE lp_mkfile  */
-#line 294 "parser.y"
+  case 104: /* mkfile: T_MKFILE lp_mkfile  */
+#line 297 "parser.y"
                               {
     Mkfile mkfile(path, r, size, cont);
     mkfile.ejecutarComando();
     limpiarVariables();
 }
-#line 2011 "parser.cpp"
+#line 2036 "parser.cpp"
     break;
 
-  case 104: /* p_mkfile: T_G_PATH T_IGUAL T_CADENA  */
-#line 303 "parser.y"
-                                      { path = std::string((yyvsp[0].val));}
-#line 2017 "parser.cpp"
-    break;
-
-  case 105: /* p_mkfile: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
-#line 304 "parser.y"
-                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 2023 "parser.cpp"
-    break;
-
-  case 106: /* p_mkfile: T_G_PATH T_IGUAL T_ARCHIVO  */
-#line 305 "parser.y"
-                                         { path = std::string((yyvsp[0].val)); }
-#line 2029 "parser.cpp"
-    break;
-
-  case 107: /* p_mkfile: T_G_R  */
+  case 107: /* p_mkfile: T_G_PATH T_IGUAL T_CADENA  */
 #line 306 "parser.y"
-                    { r = "1";}
-#line 2035 "parser.cpp"
+                                      { path = std::string((yyvsp[0].val));}
+#line 2042 "parser.cpp"
     break;
 
-  case 108: /* p_mkfile: T_G_S T_IGUAL T_NUMEROP  */
+  case 108: /* p_mkfile: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 307 "parser.y"
-                                      { size = std::string((yyvsp[0].val)); }
-#line 2041 "parser.cpp"
+                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
+#line 2048 "parser.cpp"
     break;
 
-  case 109: /* p_mkfile: T_G_CONT T_IGUAL T_CADENA  */
+  case 109: /* p_mkfile: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 308 "parser.y"
-                                        { cont = std::string((yyvsp[0].val));}
-#line 2047 "parser.cpp"
+                                         { path = std::string((yyvsp[0].val)); }
+#line 2054 "parser.cpp"
     break;
 
-  case 110: /* p_mkfile: T_G_CONT T_IGUAL T_RUTA T_ARCHIVO  */
+  case 110: /* p_mkfile: T_G_R  */
 #line 309 "parser.y"
-                                                { cont = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 2053 "parser.cpp"
+                    { r = "1";}
+#line 2060 "parser.cpp"
     break;
 
-  case 111: /* p_mkfile: T_G_CONT T_IGUAL T_ARCHIVO  */
+  case 111: /* p_mkfile: T_G_S T_IGUAL T_NUMEROP  */
 #line 310 "parser.y"
-                                         { cont = std::string((yyvsp[0].val)); }
-#line 2059 "parser.cpp"
+                                      { size = std::string((yyvsp[0].val)); }
+#line 2066 "parser.cpp"
     break;
 
-  case 112: /* cat: T_CAT lp_cat  */
+  case 112: /* p_mkfile: T_G_CONT T_IGUAL T_CADENA  */
+#line 311 "parser.y"
+                                        { cont = std::string((yyvsp[0].val));}
+#line 2072 "parser.cpp"
+    break;
+
+  case 113: /* p_mkfile: T_G_CONT T_IGUAL T_RUTA T_ARCHIVO  */
+#line 312 "parser.y"
+                                                { cont = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
+#line 2078 "parser.cpp"
+    break;
+
+  case 114: /* p_mkfile: T_G_CONT T_IGUAL T_ARCHIVO  */
 #line 313 "parser.y"
+                                         { cont = std::string((yyvsp[0].val)); }
+#line 2084 "parser.cpp"
+    break;
+
+  case 115: /* cat: T_CAT lp_cat  */
+#line 316 "parser.y"
                     {
     Cat cat(nFile, paths);
     cat.ejecutarComando();
     limpiarVariables();
 }
-#line 2069 "parser.cpp"
+#line 2094 "parser.cpp"
     break;
 
-  case 115: /* p_cat: T_G_FILE T_NUMEROP T_IGUAL T_CADENA  */
-#line 322 "parser.y"
+  case 118: /* p_cat: T_G_FILE T_NUMEROP T_IGUAL T_CADENA  */
+#line 325 "parser.y"
                                             { paths.push_back(std::string((yyvsp[0].val)));
  std::string arch = std::string((yyvsp[-3].val)) + std::string((yyvsp[-2].val)); nFile.push_back(arch);}
-#line 2076 "parser.cpp"
+#line 2101 "parser.cpp"
     break;
 
-  case 116: /* p_cat: T_G_FILE T_NUMEROP T_IGUAL T_RUTA T_ARCHIVO  */
-#line 324 "parser.y"
+  case 119: /* p_cat: T_G_FILE T_NUMEROP T_IGUAL T_RUTA T_ARCHIVO  */
+#line 327 "parser.y"
                                                       { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));
         std::string arch = std::string((yyvsp[-4].val)) + std::string((yyvsp[-3].val)); nFile.push_back(arch);
         paths.push_back(path);}
-#line 2084 "parser.cpp"
+#line 2109 "parser.cpp"
     break;
 
-  case 117: /* p_cat: T_G_FILE T_NUMEROP T_IGUAL T_ARCHIVO  */
-#line 327 "parser.y"
+  case 120: /* p_cat: T_G_FILE T_NUMEROP T_IGUAL T_ARCHIVO  */
+#line 330 "parser.y"
                                                { path = std::string((yyvsp[0].val)); 
         paths.push_back(path);
         std::string arch = std::string((yyvsp[-3].val)) + std::string((yyvsp[-2].val)); nFile.push_back(arch);}
-#line 2092 "parser.cpp"
+#line 2117 "parser.cpp"
     break;
 
-  case 118: /* remove: T_REMOVE lp_remove  */
-#line 332 "parser.y"
+  case 121: /* remove: T_REMOVE lp_remove  */
+#line 335 "parser.y"
                           {
     Remove remove(path);
     remove.ejecutarComando();
     limpiarVariables();
 }
-#line 2102 "parser.cpp"
+#line 2127 "parser.cpp"
     break;
 
-  case 121: /* p_remove: T_G_PATH T_IGUAL T_CADENA  */
-#line 341 "parser.y"
+  case 124: /* p_remove: T_G_PATH T_IGUAL T_CADENA  */
+#line 344 "parser.y"
                                       { path = std::string((yyvsp[0].val));}
-#line 2108 "parser.cpp"
+#line 2133 "parser.cpp"
     break;
 
-  case 122: /* p_remove: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
-#line 342 "parser.y"
+  case 125: /* p_remove: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
+#line 345 "parser.y"
                                                 { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 2114 "parser.cpp"
+#line 2139 "parser.cpp"
     break;
 
-  case 123: /* p_remove: T_G_PATH T_IGUAL T_ARCHIVO  */
-#line 343 "parser.y"
-                                         { path = std::string((yyvsp[0].val)); }
-#line 2120 "parser.cpp"
-    break;
-
-  case 124: /* edit: T_EDIT lp_edit  */
+  case 126: /* p_remove: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 346 "parser.y"
+                                         { path = std::string((yyvsp[0].val)); }
+#line 2145 "parser.cpp"
+    break;
+
+  case 127: /* edit: T_EDIT lp_edit  */
+#line 349 "parser.y"
                         {
     Edit edit(path, cont);
     edit.ejecutarComando();
     limpiarVariables();
 }
-#line 2130 "parser.cpp"
+#line 2155 "parser.cpp"
     break;
 
-  case 127: /* p_edit: T_G_PATH T_IGUAL T_CADENA  */
-#line 355 "parser.y"
-                                      { path = std::string((yyvsp[0].val));}
-#line 2136 "parser.cpp"
-    break;
-
-  case 128: /* p_edit: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
-#line 356 "parser.y"
-                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 2142 "parser.cpp"
-    break;
-
-  case 129: /* p_edit: T_G_PATH T_IGUAL T_ARCHIVO  */
-#line 357 "parser.y"
-                                         { path = std::string((yyvsp[0].val)); }
-#line 2148 "parser.cpp"
-    break;
-
-  case 130: /* p_edit: T_G_CONT T_IGUAL T_CADENA  */
+  case 130: /* p_edit: T_G_PATH T_IGUAL T_CADENA  */
 #line 358 "parser.y"
-                                        { cont = std::string((yyvsp[0].val));}
-#line 2154 "parser.cpp"
+                                      { path = std::string((yyvsp[0].val));}
+#line 2161 "parser.cpp"
     break;
 
-  case 131: /* p_edit: T_G_CONT T_IGUAL T_RUTA T_ARCHIVO  */
+  case 131: /* p_edit: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 359 "parser.y"
-                                                { cont = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 2160 "parser.cpp"
+                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
+#line 2167 "parser.cpp"
     break;
 
-  case 132: /* p_edit: T_G_CONT T_IGUAL T_ARCHIVO  */
+  case 132: /* p_edit: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 360 "parser.y"
-                                         { cont = std::string((yyvsp[0].val)); }
-#line 2166 "parser.cpp"
+                                         { path = std::string((yyvsp[0].val)); }
+#line 2173 "parser.cpp"
     break;
 
-  case 133: /* rename: T_RENAME lp_rename  */
+  case 133: /* p_edit: T_G_CONT T_IGUAL T_CADENA  */
+#line 361 "parser.y"
+                                        { cont = std::string((yyvsp[0].val));}
+#line 2179 "parser.cpp"
+    break;
+
+  case 134: /* p_edit: T_G_CONT T_IGUAL T_RUTA T_ARCHIVO  */
+#line 362 "parser.y"
+                                                { cont = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
+#line 2185 "parser.cpp"
+    break;
+
+  case 135: /* p_edit: T_G_CONT T_IGUAL T_ARCHIVO  */
 #line 363 "parser.y"
+                                         { cont = std::string((yyvsp[0].val)); }
+#line 2191 "parser.cpp"
+    break;
+
+  case 136: /* rename: T_RENAME lp_rename  */
+#line 366 "parser.y"
                               {
     Rename rename(path, name);
     rename.ejecutarComando();
     limpiarVariables();
 }
-#line 2176 "parser.cpp"
+#line 2201 "parser.cpp"
     break;
 
-  case 136: /* p_rename: T_G_PATH T_IGUAL T_CADENA  */
-#line 372 "parser.y"
-                                        { path = std::string((yyvsp[0].val));}
-#line 2182 "parser.cpp"
-    break;
-
-  case 137: /* p_rename: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
-#line 373 "parser.y"
-                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 2188 "parser.cpp"
-    break;
-
-  case 138: /* p_rename: T_G_PATH T_IGUAL T_ARCHIVO  */
-#line 374 "parser.y"
-                                         { path = std::string((yyvsp[0].val)); }
-#line 2194 "parser.cpp"
-    break;
-
-  case 139: /* p_rename: T_G_NAME T_IGUAL T_CADENA  */
+  case 139: /* p_rename: T_G_PATH T_IGUAL T_CADENA  */
 #line 375 "parser.y"
-                                        { name = std::string((yyvsp[0].val));}
-#line 2200 "parser.cpp"
+                                        { path = std::string((yyvsp[0].val));}
+#line 2207 "parser.cpp"
     break;
 
-  case 140: /* p_rename: T_G_NAME T_IGUAL T_ARCHIVO  */
+  case 140: /* p_rename: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 376 "parser.y"
-                                         { name = std::string((yyvsp[0].val)); }
-#line 2206 "parser.cpp"
+                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
+#line 2213 "parser.cpp"
     break;
 
-  case 141: /* mkdir: T_MKDIR lp_mkdir  */
+  case 141: /* p_rename: T_G_PATH T_IGUAL T_ARCHIVO  */
+#line 377 "parser.y"
+                                         { path = std::string((yyvsp[0].val)); }
+#line 2219 "parser.cpp"
+    break;
+
+  case 142: /* p_rename: T_G_NAME T_IGUAL T_CADENA  */
+#line 378 "parser.y"
+                                        { name = std::string((yyvsp[0].val));}
+#line 2225 "parser.cpp"
+    break;
+
+  case 143: /* p_rename: T_G_NAME T_IGUAL T_ARCHIVO  */
 #line 379 "parser.y"
+                                         { name = std::string((yyvsp[0].val)); }
+#line 2231 "parser.cpp"
+    break;
+
+  case 144: /* mkdir: T_MKDIR lp_mkdir  */
+#line 382 "parser.y"
                            {
     Mkdir mkdir(path, r);
     mkdir.ejecutarComando();
     limpiarVariables();
 }
-#line 2216 "parser.cpp"
+#line 2241 "parser.cpp"
     break;
 
-  case 144: /* p_mkdir: T_G_PATH T_IGUAL T_CADENA  */
-#line 388 "parser.y"
-                                       { path = std::string((yyvsp[0].val));}
-#line 2222 "parser.cpp"
-    break;
-
-  case 145: /* p_mkdir: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
-#line 389 "parser.y"
-                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 2228 "parser.cpp"
-    break;
-
-  case 146: /* p_mkdir: T_G_PATH T_IGUAL T_ARCHIVO  */
-#line 390 "parser.y"
-                                         { path = std::string((yyvsp[0].val)); }
-#line 2234 "parser.cpp"
-    break;
-
-  case 147: /* p_mkdir: T_G_R  */
+  case 147: /* p_mkdir: T_G_PATH T_IGUAL T_CADENA  */
 #line 391 "parser.y"
-                    { r = "1";}
-#line 2240 "parser.cpp"
+                                       { path = std::string((yyvsp[0].val));}
+#line 2247 "parser.cpp"
     break;
 
-  case 148: /* copy: T_COPY lp_copy  */
+  case 148: /* p_mkdir: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
+#line 392 "parser.y"
+                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
+#line 2253 "parser.cpp"
+    break;
+
+  case 149: /* p_mkdir: T_G_PATH T_IGUAL T_ARCHIVO  */
+#line 393 "parser.y"
+                                         { path = std::string((yyvsp[0].val)); }
+#line 2259 "parser.cpp"
+    break;
+
+  case 150: /* p_mkdir: T_G_R  */
 #line 394 "parser.y"
+                    { r = "1";}
+#line 2265 "parser.cpp"
+    break;
+
+  case 151: /* copy: T_COPY lp_copy  */
+#line 397 "parser.y"
                         {
     Copy copy(path, destino);
     copy.ejecutarComando();
     limpiarVariables();
 }
-#line 2250 "parser.cpp"
+#line 2275 "parser.cpp"
     break;
 
-  case 151: /* p_copy: T_G_PATH T_IGUAL T_CADENA  */
-#line 403 "parser.y"
-                                      { path = std::string((yyvsp[0].val));}
-#line 2256 "parser.cpp"
-    break;
-
-  case 152: /* p_copy: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
-#line 404 "parser.y"
-                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 2262 "parser.cpp"
-    break;
-
-  case 153: /* p_copy: T_G_PATH T_IGUAL T_ARCHIVO  */
-#line 405 "parser.y"
-                                         { path = std::string((yyvsp[0].val)); }
-#line 2268 "parser.cpp"
-    break;
-
-  case 154: /* p_copy: T_G_PATH T_IGUAL T_RUTA  */
+  case 154: /* p_copy: T_G_PATH T_IGUAL T_CADENA  */
 #line 406 "parser.y"
-                                      { path = std::string ((yyvsp[0].val)); }
-#line 2274 "parser.cpp"
+                                      { path = std::string((yyvsp[0].val));}
+#line 2281 "parser.cpp"
     break;
 
-  case 155: /* p_copy: T_G_DESTINO T_IGUAL T_CADENA  */
+  case 155: /* p_copy: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 407 "parser.y"
-                                           { destino = std::string((yyvsp[0].val));}
-#line 2280 "parser.cpp"
+                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
+#line 2287 "parser.cpp"
     break;
 
-  case 156: /* p_copy: T_G_DESTINO T_IGUAL T_RUTA  */
+  case 156: /* p_copy: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 408 "parser.y"
-                                         { destino = std::string ((yyvsp[0].val)); }
-#line 2286 "parser.cpp"
+                                         { path = std::string((yyvsp[0].val)); }
+#line 2293 "parser.cpp"
     break;
 
-  case 157: /* move: T_MOVE lp_move  */
+  case 157: /* p_copy: T_G_PATH T_IGUAL T_RUTA  */
+#line 409 "parser.y"
+                                      { path = std::string ((yyvsp[0].val)); }
+#line 2299 "parser.cpp"
+    break;
+
+  case 158: /* p_copy: T_G_DESTINO T_IGUAL T_CADENA  */
+#line 410 "parser.y"
+                                           { destino = std::string((yyvsp[0].val));}
+#line 2305 "parser.cpp"
+    break;
+
+  case 159: /* p_copy: T_G_DESTINO T_IGUAL T_RUTA  */
 #line 411 "parser.y"
+                                         { destino = std::string ((yyvsp[0].val)); }
+#line 2311 "parser.cpp"
+    break;
+
+  case 160: /* move: T_MOVE lp_move  */
+#line 414 "parser.y"
                         {
     Move move(path, destino);
     move.ejecutarComando();
     limpiarVariables();
 }
-#line 2296 "parser.cpp"
+#line 2321 "parser.cpp"
     break;
 
-  case 160: /* p_move: T_G_PATH T_IGUAL T_CADENA  */
-#line 420 "parser.y"
-                                      { path = std::string((yyvsp[0].val));}
-#line 2302 "parser.cpp"
-    break;
-
-  case 161: /* p_move: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
-#line 421 "parser.y"
-                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
-#line 2308 "parser.cpp"
-    break;
-
-  case 162: /* p_move: T_G_PATH T_IGUAL T_ARCHIVO  */
-#line 422 "parser.y"
-                                         { path = std::string((yyvsp[0].val)); }
-#line 2314 "parser.cpp"
-    break;
-
-  case 163: /* p_move: T_G_PATH T_IGUAL T_RUTA  */
+  case 163: /* p_move: T_G_PATH T_IGUAL T_CADENA  */
 #line 423 "parser.y"
-                                      { path = std::string ((yyvsp[0].val)); }
-#line 2320 "parser.cpp"
+                                      { path = std::string((yyvsp[0].val));}
+#line 2327 "parser.cpp"
     break;
 
-  case 164: /* p_move: T_G_DESTINO T_IGUAL T_CADENA  */
+  case 164: /* p_move: T_G_PATH T_IGUAL T_RUTA T_ARCHIVO  */
 #line 424 "parser.y"
-                                           { destino = std::string((yyvsp[0].val));}
-#line 2326 "parser.cpp"
+                                                { path = std::string((yyvsp[-1].val)) + std::string((yyvsp[0].val));}
+#line 2333 "parser.cpp"
     break;
 
-  case 165: /* p_move: T_G_DESTINO T_IGUAL T_RUTA  */
+  case 165: /* p_move: T_G_PATH T_IGUAL T_ARCHIVO  */
 #line 425 "parser.y"
-                                         { destino = std::string ((yyvsp[0].val)); }
-#line 2332 "parser.cpp"
+                                         { path = std::string((yyvsp[0].val)); }
+#line 2339 "parser.cpp"
     break;
 
-  case 166: /* pause: T_PAUSE  */
+  case 166: /* p_move: T_G_PATH T_IGUAL T_RUTA  */
+#line 426 "parser.y"
+                                      { path = std::string ((yyvsp[0].val)); }
+#line 2345 "parser.cpp"
+    break;
+
+  case 167: /* p_move: T_G_DESTINO T_IGUAL T_CADENA  */
+#line 427 "parser.y"
+                                           { destino = std::string((yyvsp[0].val));}
+#line 2351 "parser.cpp"
+    break;
+
+  case 168: /* p_move: T_G_DESTINO T_IGUAL T_RUTA  */
 #line 428 "parser.y"
+                                         { destino = std::string ((yyvsp[0].val)); }
+#line 2357 "parser.cpp"
+    break;
+
+  case 169: /* pause: T_PAUSE  */
+#line 431 "parser.y"
                {
     Pausa pausa;
     pausa.ejecutarComando();
 }
-#line 2341 "parser.cpp"
+#line 2366 "parser.cpp"
     break;
 
 
-#line 2345 "parser.cpp"
+#line 2370 "parser.cpp"
 
       default: break;
     }
@@ -2534,7 +2559,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 433 "parser.y"
+#line 436 "parser.y"
 
 
 void yyerror(const char *s) {

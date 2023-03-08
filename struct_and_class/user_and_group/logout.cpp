@@ -7,6 +7,13 @@ Logout::Logout(){
 }
 
 void Logout::ejecutarComando(){
-  cout<<"entro al logot"<<endl;
+  if(usuario_logueado.iniciado){
+    usuario_logueado.iniciado = false;
+    usuario_logueado.is_admin = 0;
+    usuario_logueado.user = "";
+    cout<<"Cierre de sesion exitosa"<<endl;
+  }else{
+    cout<<"Error, no hay una sesion iniciada"<<endl;
+  }
   
 }

@@ -5,14 +5,15 @@
 #include "../structs.h"
 #include <algorithm>
 #include <cmath>
+#include <sstream>
 
 using std::string;
 
 class Rmgrp{
     private:
-      string id;
+      string name;
     public:
-        //id
+        //name
         Rmgrp(string); //constructor
         void ejecutarComando();
 

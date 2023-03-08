@@ -50,6 +50,7 @@
         "streambuf": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "method and function": "c"
+        "method and function": "c",
+        "sstream": "cpp"
     }
 }

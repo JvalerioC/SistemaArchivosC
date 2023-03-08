@@ -7,6 +7,6 @@ Pausa::Pausa(){
 }
 
 void Pausa::ejecutarComando(){
-  cout << "Presione cualquier tecla para continuar...\n";
+  cout << "Presione Enter para continuar...\n";
   std::getchar();
 }

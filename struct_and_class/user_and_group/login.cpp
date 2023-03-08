@@ -1,4 +1,5 @@
 #include "login.h"
+#include <sstream>
 
 using std::cout, std::endl;
 
@@ -38,7 +39,7 @@ void Login::ejecutarComando(){
   }
   //vamos a verificar si es el root
   if(user.compare("root")==0 && pass.compare("123") == 0){
-    cout<<"Inicio de sesion exitoso"<<endl;
+    cout<<"Inicio de sesion exitoso, Bienvenido root"<<endl;
     usuario_logueado.iniciado = true;
     usuario_logueado.is_admin = 1;
     usuario_logueado.user = "root";
@@ -61,10 +62,9 @@ void Login::iniciarSesion(itemMount _item){
   SUPERBLOQUE sb;
   fread(&sb, sizeof(SUPERBLOQUE), 1, archivo);
   //leemos el inodo del archivo
-  fseek(archivo, sb.s_inode_start*2, SEEK_SET);
+  fseek(archivo, sb.s_inode_start+(sb.s_inode_s), SEEK_SET);
   B_INODO inodo;
   fread(&inodo, sizeof(B_INODO), 1, archivo);
-
   //recuperamos el contenido del archivo
   string archivo_usuarios = "";
   for (size_t i = 0; i < 15; i++){
@@ -79,18 +79,68 @@ void Login::iniciarSesion(itemMount _item){
       break;
     }else{
       if(inodo.i_block[i] != -1){
-        archivo_usuarios += contenidoArchivo(i);
+        B_ARCHIVO b_archivo;
+        fseek(archivo, sb.s_block_start+(sb.s_block_s*inodo.i_block[i]), SEEK_SET);
+        fread(&b_archivo, sizeof(B_ARCHIVO), 1, archivo);
+        archivo_usuarios += std::string(b_archivo.b_content, std::strlen(b_archivo.b_content));
+        
       }else{
         break;
       }
+    } 
+  }
+  fclose(archivo);
+  //aqui ya trabajamos con el contenido de archivo_usuarios
+  
+  std::stringstream au(archivo_usuarios);
+  std::vector<string> parts;
+
+  //separamos el saltos de linea
+  string token;
+  while (std::getline(au, token, '\n')) {
+      parts.push_back(token);
+  }
+
+  // Imprimir las partes resultantes
+  /* for (const auto& part : parts) {
+      std::cout << part << std::endl;
+  } */
+  //ahora separamos por comas
+  std::vector<std::vector<string>> usuario_registrado;
+  std::vector<string> parts2;
+  for (size_t i = 0; i < parts.size(); i++){
+    std::stringstream subss(parts[i]);
+    while (std::getline(subss, token, ',')) {
+      parts2.push_back(token);
     }
+    usuario_registrado.push_back(parts2);
+    parts2.clear();
+  }
+  //imprimir las subpartes de las partes :v
+  bool encontrado = false;
+  for (const auto& parts_ : usuario_registrado) {
+    /* for (const auto& part : parts_) {
+      std::cout << part << std::endl;
+    } */
+    if(parts_[0] != "0"){
+      if(parts_[1] == "U"){
+        if(user == parts_[3] && pass == parts_[4]){
+          encontrado = true;
+        }
+      }
+    }
+  }
+  //en este punto se busca el usuario
+  if(encontrado){
+    cout<<"Inicio de Sesion Exitoso, Bienvenido "<<endl;
+    usuario_logueado.iniciado = true;
+    usuario_logueado.is_admin = 0;
+    usuario_logueado.user = user;
+    usuario_logueado.loginItem = _item;
+  }else{
+    cout<<"Error, el usuario no existe o contrasenia incorrecta"<<endl;
     
   }
-  
-
 
 }
 
-string Login::contenidoArchivo(int num_bloque){
-  return "va";
-}

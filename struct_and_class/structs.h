@@ -34,7 +34,7 @@ typedef struct{
     int part_start=0;
     int part_s=0;
     int part_next=0;
-    char part_name[16];
+    char part_name[16] = {0};
 
 }EBR;
 
@@ -60,8 +60,8 @@ typedef struct{
     int s_magic=0;
     int s_inode_s=0;
     int s_block_s=0;
-    int s_firts_ino=1;
-    int s_first_blo=1;
+    int s_firts_ino=0;
+    int s_first_blo=0;
     int s_bm_inode_start=0;
     int s_bm_block_start=0;
     int s_inode_start=0;
@@ -77,15 +77,15 @@ typedef struct{
     time_t i_atime;
     time_t i_ctime;
     time_t i_mtime;
-    int i_block[15]={-1};
-    char i_type='0';
+    int i_block[15]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+    char i_type='0'; //0 carpeta, 1 archivo
     int i_perm=0;
 
 }B_INODO;
 
 //estructura para el bloque de contenido
 typedef struct{
-    char b_name[12];
+    char b_name[12] = {0};
     int b_inodo=-1; 
 }B_CONTENIDO;
 
@@ -99,12 +99,12 @@ typedef struct{
 
 //estructura para el bloque de archivo
 typedef struct{
-    char b_content[64];
+    char b_content[64] = {0};
 }B_ARCHIVO;
 
 //estructura para el bloque de apuntadores
 typedef struct{
-   int b_pointers[16] = {0}; 
+   int b_pointers[16] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}; 
 }B_APUNTADOR;
 
 typedef struct{

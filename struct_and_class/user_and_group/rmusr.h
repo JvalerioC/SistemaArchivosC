@@ -12,7 +12,7 @@ class Rmusr{
     private:
       string user;
     public:
-        //id
+        //user
         Rmusr(string); //constructor
         void ejecutarComando();
 

@@ -62,7 +62,7 @@ void Mkfs::formateoExt2(itemMount _item){
   //calculamos el numero de estructuras
   int n = (_item.part.part_s - sizeof(SUPERBLOQUE))/(1+sizeof(B_INODO)+3+(3*sizeof(B_CARPETA)));
   n = floor(n);
-  cout<<n<<endl;
+  //cout<<n<<endl;
   //calculamos el numero de bloques e inodos
   sb.s_blocks_count = 3*n;
   sb.s_inodes_count = n;
@@ -77,8 +77,8 @@ void Mkfs::formateoExt2(itemMount _item){
   sb.s_magic = 0xEF53;
   sb.s_block_s = sizeof(B_CARPETA);
   sb.s_inode_s = sizeof(B_INODO);
-  sb.s_firts_ino = 1; //se pone respecto al bitmap de inodos y bloques que
-  sb.s_first_blo = 1; //por el momento no hay nada
+  sb.s_firts_ino = 0; //se pone respecto al bitmap de inodos y bloques que
+  sb.s_first_blo = 0; //por el momento no hay nada
   sb.s_bm_inode_start = _item.part.part_start + sizeof(SUPERBLOQUE);
   sb.s_bm_block_start = sb.s_bm_inode_start + n;
   sb.s_inode_start = sb.s_bm_block_start + (3*n);
@@ -86,11 +86,11 @@ void Mkfs::formateoExt2(itemMount _item){
   int posFinal = sb.s_block_start+((3*n)*sizeof(B_CARPETA));
   //vamos a asegurarnos que no pase el espacio
   int tt = sizeof(SUPERBLOQUE)+n+(3*n)+(n*sizeof(B_INODO))+((3*n)*sizeof(B_CARPETA));
-  if(_item.part.part_s > tt){
+  /* if(_item.part.part_s > tt){
     cout<<"todo bien, todo correcto"<<endl;
   }else{
     cout<<"todo mal calculado :("<<endl;
-  }
+  } */
   // terminado el superbloque se creara el  directorio raiz y el archivo users.txt
   B_INODO bi; //inodo de la raiz
   bi.i_uid = 1;
@@ -99,21 +99,22 @@ void Mkfs::formateoExt2(itemMount _item){
   bi.i_ctime = t;
   bi.i_mtime = t;
   bi.i_type = '0';
-  bi.i_perm = 755;
+  bi.i_perm = 644;
   //se aumenta en uno el primer inodo libre
   sb.s_firts_ino++;
   //ahora se crea el bloque de carpeta
   B_CARPETA bc; //primer bloque donde se 
   bc.b_content[0].b_inodo = 0;
-  bc.b_content[0].b_name[0] = '.';
+  string padre = ".";
+  strcpy(bc.b_content[0].b_name, padre.c_str());
   bc.b_content[1].b_inodo = 0;
-  string padre = "..";
+  padre = "..";
   strcpy(bc.b_content[1].b_name, padre.c_str());
-  bc.b_content[2].b_inodo = 2;
+  bc.b_content[2].b_inodo = 1;
   padre = "users.txt";
   strcpy(bc.b_content[2].b_name, padre.c_str());
   sb.s_first_blo++;
-  bi.i_block[0] = 2;
+  bi.i_block[0] = 0;
 
   //creamos el inodo del users.txt
   B_INODO bi1;
@@ -123,12 +124,13 @@ void Mkfs::formateoExt2(itemMount _item){
   bi1.i_ctime = t;
   bi1.i_mtime = t;
   bi1.i_type = '1';
-  bi1.i_perm = 755;
-
+  bi1.i_perm = 644;
+  bi1.i_block[0] = 1;
   sb.s_firts_ino++;
 
   B_ARCHIVO ba;
   string users = "1,G,root\n1,U,root,root,123\n";
+  bi1.i_s = users.length();
   
   strcpy(ba.b_content, users.c_str());
   sb.s_first_blo++;
