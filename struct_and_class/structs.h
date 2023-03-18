@@ -108,6 +108,15 @@ typedef struct{
 }B_APUNTADOR;
 
 typedef struct{
+    std::string accion = "";
+    std::string nombre = "";
+    std::string destino = "";
+    std::string contenido = "";
+    time_t fecha;
+
+}JOURNALING;
+
+typedef struct{
     bool iniciado = false;
     int is_admin = 0;
     std::string user = "";

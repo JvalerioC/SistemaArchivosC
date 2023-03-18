@@ -43,14 +43,14 @@ void Rmusr::ejecutarComando(){
   bool encontrado = false;
   int posicion_bloque = 0;  
   B_ARCHIVO b_archivo;
-  for (size_t i = 0; i < 15; i++){
-    if(i == 14){
+  for (size_t i = 0; i < 16; i++){
+    if(i == 15){
       //vamos al apuntador triple
       break;
-    }else if(i == 13){
+    }else if(i == 14){
       //vamos al apuntador doble
       break;
-    }else if(i == 12){
+    }else if(i == 13){
       //vamos al apuntador simple
       break;
     }else{
@@ -63,16 +63,16 @@ void Rmusr::ejecutarComando(){
         if(pos != string::npos){ 
           posicion_bloque = inodo.i_block[i];
           encontrado = true;
-        }else{
+          //ya encontrado buscamos el ultimo salto de linea en el contenido para obtener la posicion del uid y reescribirla
+          int pos2 = archivo_usuarios.find_last_of("\n", pos);
+          if (pos2 != std::string::npos) {
+            b_archivo.b_content[pos2+1] = '0';
+          }else{
+            b_archivo.b_content[0] = '0';
+          }
           break;
         }
-        //ya encontrado buscamos el ultimo salto de linea en el contenido para obtener la posicion del uid y reescribirla
-        int pos2 = archivo_usuarios.find_last_of("\n", pos);
-        if (pos2 != std::string::npos) {
-          b_archivo.b_content[pos2+1] = '0';
-        }else{
-          b_archivo.b_content[0] = '0';
-        }
+        
       }else{
         break;
       }

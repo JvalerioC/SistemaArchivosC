@@ -254,16 +254,16 @@ logout:     T_LOGOUT {
 };
 
 //analisis para el comando mkgrp
-mkgrp:  T_MKGRP T_G_NAME T_ID {
-    id = std::string($3);
+mkgrp:  T_MKGRP T_G_NAME T_IGUAL T_ID {
+    id = std::string($4);
     Mkgrp mkgrp(id);
     mkgrp.ejecutarComando();
     limpiarVariables();
 };
 
 //analisis para el comando 
-rmgrp:  T_RMGRP T_G_NAME T_ID{
-    id = std::string($3);
+rmgrp:  T_RMGRP T_G_NAME T_IGUAL T_ID{
+    id = std::string($4);
     Rmgrp rmgrp(id);
     rmgrp.ejecutarComando();
     limpiarVariables();
@@ -284,8 +284,8 @@ p_mkusr:    T_G_USR T_IGUAL T_ID { user = std::string($3); }
             | T_G_GRP T_IGUAL T_ID { grp = std::string($3); };
 
 //analisis para el comando rmusr
-rmusr:  T_RMUSR T_G_USR T_ID {
-    user = std::string($3);
+rmusr:  T_RMUSR T_G_USR  T_IGUAL T_ID {
+    user = std::string($4);
     Rmusr rmusr(user);
     rmusr.ejecutarComando();
     limpiarVariables();

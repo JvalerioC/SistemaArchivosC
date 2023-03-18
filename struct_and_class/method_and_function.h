@@ -1,10 +1,11 @@
 #ifndef Methods_Functions_
 #define Methods_Functions_
 
-#include <string>
+#include <cstring>
 #include <unistd.h>
 #include <iostream>
 #include "structs.h"
+#include <algorithm>
 
 using std::string, std::cout, std::endl;
 
@@ -20,5 +21,14 @@ void ordenarTamanio(PARTITION[]);
 
 //funcion para mostrar las particiones montadas
 void imprimirParticionesMontadas();
+
+//funcion para encontrar un inodo
+int encontrarInodo(B_INODO, SUPERBLOQUE, FILE*, string);
+
+//funcion para crear un inodo (carpeta con el primer bloque)
+void crearInodo(SUPERBLOQUE*, FILE*, string, B_INODO, int);
+
+//funcion para crear un inodo (archivo con su contenido)
+void crearInodoArchivo(SUPERBLOQUE*, FILE*, string, B_INODO, int, string);
 
 #endif

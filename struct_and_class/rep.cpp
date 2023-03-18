@@ -565,7 +565,7 @@ void Rep::reporteFile(itemMount _item){
     inodo = inodo1;
     if(inodo.i_type != '1'){
       B_CARPETA bc;
-      for (size_t j = 0; j < 15; j++){
+      for (size_t j = 0; j < 16; j++){
         if(inodo.i_block[j] == -1){
           break;
         }
@@ -664,7 +664,7 @@ void Rep::reporteInodo(itemMount _item){
       dot += "          <td>i_perm</td>\n";
       dot += "          <td>"+std::to_string(inodo.i_perm)+"</td>\n";
       dot += "        </tr>\n";
-      for (size_t j = 0; j < 15; j++){
+      for (size_t j = 0; j < 16; j++){
         dot += "        <tr>\n";
         dot += "          <td>i_block_"+std::to_string(j+1)+"</td>\n";
         dot += "          <td>"+std::to_string(inodo.i_block[j])+"</td>\n";

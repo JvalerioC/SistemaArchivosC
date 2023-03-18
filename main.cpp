@@ -33,3 +33,8 @@ int main(){
 //bison -d parser.y
 //comando para compilar ./compile.sh
 //ejecutar sudo ./main
+
+//matar todo en docker
+//sudo systemctl restart docker.socket docker.service
+//para tener el uid
+//getent passwd <UID> | cut -d: -f1

@@ -92,7 +92,7 @@ void Mkusr::ejecutarComando(){
   }
   //buscamos si el grupo ya existe
   bool encontrado = false, encontrado2 = false;
-  int contador_usuarios= 0;
+  int contador_usuarios= 1;
   for (const auto& parts_ : usuario_registrado) {
     
     if(parts_[0] != "0"){
@@ -132,16 +132,16 @@ void Mkusr::ejecutarComando(){
   nueva+= pass;
   nueva+= "\n";
   //se ve en el inodo del archivo 
-  for (size_t i = 0; i < 15; i++){
+  for (size_t i = 0; i < 16; i++){
   
     if(inodo.i_block[i] != -1){
-      if(i == 14){
+      if(i == 15){
         //vamos al apuntador triple
         break;
-      }else if(i == 13){
+      }else if(i == 14){
         //vamos al apuntador doble
         break;
-      }else if(i == 12){
+      }else if(i == 13){
         //vamos al apuntador simple
         break;
       }else{
